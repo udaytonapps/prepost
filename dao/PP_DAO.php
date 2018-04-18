@@ -35,10 +35,10 @@ class PP_DAO {
         return $this->PDOX->lastInsertId();
     }
 
-    function createQuestion($user_id, $main_id, $question, $show_wrap_up_text)
+    function createQuestion($user_id, $main_id, $question, $wrap_up_text, $show_wrap_up_text)
     {
-        $query = "INSERT INTO {$this->p}pp_question (main_id, created, created_by, modified, modified_by, question, show_wrap_up_text) VALUES (:main_id, now(), :created_by, now(), :modified_by, :question ,:show_wrap_up_text);";
-        $arr = array(':main_id' => $main_id, ':created_by' => $user_id, ':modified_by' => $user_id, ':question' => $question, ':show_wrap_up_text' => $show_wrap_up_text);
+        $query = "INSERT INTO {$this->p}pp_question (main_id, created, created_by, modified, modified_by, question, wrap_up_text, show_wrap_up_text) VALUES (:main_id, now(), :created_by, now(), :modified_by, :question, :wrap_up_text, :show_wrap_up_text);";
+        $arr = array(':main_id' => $main_id, ':created_by' => $user_id, ':modified_by' => $user_id, ':question' => $question, ':wrap_up_text' => $wrap_up_text, ':show_wrap_up_text' => $show_wrap_up_text);
         $this->PDOX->queryDie($query, $arr);
         return $this->PDOX->lastInsertId();
     }

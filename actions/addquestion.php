@@ -13,6 +13,7 @@ $PP_DAO = new PP_DAO($PDOX, $p);
 
 if ( $USER->instructor ) {
     $Question = $_POST["PrePostQuestion"];
+    $WrapUpText = $_POST["PrePostWrapUpText"];
 
     // New question
     $main_id = $_SESSION["main_ID"];
@@ -20,7 +21,7 @@ if ( $USER->instructor ) {
     if(!$showWrapUpText){
         $showWrapUpText = 0;
     }
-    $PP_DAO->createQuestion($USER->id, $main_id, $Question, $showWrapUpText);
+    $PP_DAO->createQuestion($USER->id, $main_id, $Question, $WrapUpText, $showWrapUpText);
 
     header( 'Location: '.addSession('../index.php') ) ;
 }
