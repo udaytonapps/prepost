@@ -16,8 +16,10 @@ $PP_DAO = new PP_DAO($PDOX, $p);
 // Start of the output
 $OUTPUT->header();
 ?>
+
     <!-- Our main css file that overrides default Tsugi styling -->
     <link rel="stylesheet" type="text/css" href="styles/main.css" xmlns="http://www.w3.org/1999/html">
+
 <?php
 
 $OUTPUT->bodyStart();
@@ -37,21 +39,25 @@ if ($USER->instructor) {
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
                 <form method="post" id="addPrePostForm"action="actions/addquestion.php">
-                    <h3>Create Pre/Post Question</h3>
-                    <p>Type the question in the text box below.</p>
-                    <input type="hidden" name="QID" value="-1"/>
-                    <textarea class="form-control" name="PrePostQuestion" id="prePostQuestionText" rows="4"></textarea>
-                    <input type="checkbox" name="show_wrap_up_text" id="show_wrap_up_text"/>
-                    <span>Show the wrap up text area after the post answer</span>
-                    <br />
+                    <div class="form-group">
+                        <h3>Create Pre/Post Question</h3>
+                        <p>Type the question in the text box below.</p>
+                        <textarea class="form-control" name="PrePostQuestion" id="prePostQuestionText" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <p>Type the wrap up question in the text box below.</p>
+                        <textarea class="form-control" name="PrePostWrapUpText" id="prePostWrapUpText" rows="4" disabled="disabled"></textarea>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="show_wrap_up_text" id="show_wrap_up_text" onclick="PrePostJS.toggleWrapUpTextBox();">
+                            Have a wrap up question after the post question
+                            </label>
+                        </div>
+                    </div>
                     <input type="submit" id="submit" class="btn btn-success" value="Submit" />
                 </form>
             </div>
         </div>
-
         <?php
-       //  $Question = "!!!!";
-       // $PP_DAO->createQuestion($_SESSION["main_ID"], $Question);
     } else {
         ?>
         <div class="row">
@@ -87,3 +93,6 @@ $OUTPUT->footerStart();
     <script src="scripts/main.js" type="text/javascript"></script>
 <?php
 $OUTPUT->footerEnd();
+
+
+
