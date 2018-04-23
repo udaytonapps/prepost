@@ -1,6 +1,6 @@
 <?php
 $menu = array(
-    'ViewAll.php' => 'View All Results'
+    'instructor-home.php' => 'View All Results'
 );
 ?>
 

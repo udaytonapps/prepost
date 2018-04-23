@@ -36,25 +36,30 @@ if ($USER->instructor) {
     $question_ID = $PP_DAO->getQuestionId($_SESSION["main_ID"]);
     if (!$question_ID) {
         ?>
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <form method="post" id="addPrePostForm"action="actions/addquestion.php">
-                    <div class="form-group">
-                        <h3>Create Pre/Post Question</h3>
-                        <p>Type the question in the text box below.</p>
-                        <textarea class="form-control" name="PrePostQuestion" id="prePostQuestionText" rows="4"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <p>Type the wrap up question in the text box below.</p>
-                        <textarea class="form-control" name="PrePostWrapUpText" id="prePostWrapUpText" rows="4" disabled="disabled"></textarea>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="show_wrap_up_text" id="show_wrap_up_text" onclick="PrePostJS.toggleWrapUpTextBox();">
-                            Have a wrap up question after the post question
-                            </label>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <h3>Create Pre/Post Reflection</h3>
+                </div>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <form method="post" id="addPrePostForm"action="actions/addquestion.php">
+                        <div class="form-group">
+                            <p>
+                                This tool allows faculty to define a question to answer on two different occasions - before and after
+                                they've learned about a topic/subject. The students will answer thquestion before they learn about a
+                                topic/ or subject (Pre). They will then be provided a second box to answer the same question after
+                                learning about the same topic/subject (Post). The students will not be able to see their 'Pre' answer
+                                when they are entering their 'Post' answer. Finallym students will be given a final text area to reflect on
+                                how their answer has changed between their 'Pre' and 'Post' Entries
+                            </p>
+                            <h4>Pre/Post Title</h4>
+                            <input type="text" class="form-control" name="PrePostTitle" id="prePostTitleText" rows="1"></input>
+                            <h4>What question would you like participants to answer Pre and Post?</h4>
+                            <textarea class="form-control" name="PrePostQuestion" id="prePostQuestionText" rows="4"></textarea>
                         </div>
-                    </div>
-                    <input type="submit" id="submit" class="btn btn-success" value="Submit" />
-                </form>
+                        <input type="submit" id="submit" class="btn btn-success" value="Submit" />
+                    </form>
+                </div>
             </div>
         </div>
         <?php

@@ -12,16 +12,10 @@ $p = $CFG->dbprefix;
 $PP_DAO = new PP_DAO($PDOX, $p);
 
 if ( $USER->instructor ) {
+    $QuestionTitle = $_POST["PrePostTitle"];
     $Question = $_POST["PrePostQuestion"];
-    $WrapUpText = $_POST["PrePostWrapUpText"];
-
-    // New question
     $main_id = $_SESSION["main_ID"];
-    $showWrapUpText = isset($_POST['show_wrap_up_text']);
-    if(!$showWrapUpText){
-        $showWrapUpText = 0;
-    }
-    $PP_DAO->createQuestion($USER->id, $main_id, $Question, $WrapUpText, $showWrapUpText);
+    $PP_DAO->createQuestion($USER->id, $main_id, $QuestionTitle, $Question);
 
     header( 'Location: '.addSession('../index.php') ) ;
 }
