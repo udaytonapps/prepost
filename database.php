@@ -27,7 +27,9 @@ $DATABASE_INSTALL = array(
     created_by        INTEGER NULL,
     modified          datetime NULL,
     modified_by       INTEGER NULL,
-    question          TEXT NULL,   
+    question_title    TEXT NULL,
+    pre_question      TEXT NULL,   
+    post_question     TEXT NULL, 
     wrap_up_text      TEXT NULL,  
     show_wrap_up_text BOOLEAN NOT NULL DEFAULT FALSE, 
     

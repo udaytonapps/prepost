@@ -35,12 +35,19 @@ class PP_DAO {
         return $this->PDOX->lastInsertId();
     }
 
-    function createQuestion($user_id, $main_id, $question, $wrap_up_text, $show_wrap_up_text)
+    function createQuestion($user_id, $main_id, $question_title, $question)
     {
-        $query = "INSERT INTO {$this->p}pp_question (main_id, created, created_by, modified, modified_by, question, wrap_up_text, show_wrap_up_text) VALUES (:main_id, now(), :created_by, now(), :modified_by, :question, :wrap_up_text, :show_wrap_up_text);";
-        $arr = array(':main_id' => $main_id, ':created_by' => $user_id, ':modified_by' => $user_id, ':question' => $question, ':wrap_up_text' => $wrap_up_text, ':show_wrap_up_text' => $show_wrap_up_text);
+        $query = "INSERT INTO {$this->p}pp_question (main_id, created, created_by, modified, modified_by, question_title, pre_question, post_question) VALUES (:main_id, now(), :created_by, now(), :modified_by, :question_title, :question, :question);";
+        $arr = array(':main_id' => $main_id, ':created_by' => $user_id, ':modified_by' => $user_id, ':question_title' => $question_title, ':question' => $question);
         $this->PDOX->queryDie($query, $arr);
         return $this->PDOX->lastInsertId();
+    }
+
+    function getQuestion($main_id)
+    {
+        $query = "SELECT * FROM {$this->p}pp_question WHERE main_id = :main_id;";
+        $arr = array(':main_id' => $main_id);
+        return $this->PDOX->rowDie($query, $arr);
     }
 
     //Modified for testing currently. Will use question_id later
