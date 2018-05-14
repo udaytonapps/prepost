@@ -76,11 +76,7 @@ if ($USER->instructor) {
         </div>
         <?php
     } else {
-        ?>
-        <div class="text-center">
-            <h3>Default info</h3>
-        </div>
-        <?php
+        header('Location: ' . addSession('student-home.php'));
     }
 }
 

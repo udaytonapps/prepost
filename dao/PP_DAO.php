@@ -50,6 +50,13 @@ class PP_DAO {
         return $this->PDOX->rowDie($query, $arr);
     }
 
+    function getStudentAnswers($question_id, $user_id)
+    {
+        $query = "SELECT * FROM {$this->p}pp_answer WHERE question_id = :question_id AND user_id = :user_id;";
+        $arr = array(':question_id' => $question_id, ':user_id' => $user_id);
+        return $this->PDOX->rowDie($query, $arr);
+    }
+
     //Modified for testing currently. Will use question_id later
     function deleteQuestion($main_id) {
         $query = "DELETE FROM {$this->p}pp_question WHERE main_id = :main_id;";
