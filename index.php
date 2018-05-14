@@ -64,17 +64,9 @@ if ($USER->instructor) {
         </div>
         <?php
     } else {
-        ?>
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <form method="post" id="addPrePostForm"action="actions/removequestion.php">
-                    <h3>Delete Pre/Post Question</h3>
-                    <br />
-                    <input type="submit" id="submit" class="btn btn-danger" value="Delete" />
-                </form>
-            </div>
-        </div>
-        <?php
+        if ($USER->instructor) {
+            header( 'Location: '.addSession('instructor-home.php') ) ;
+        }
     }
 } else {
     if (!$main_Id) {

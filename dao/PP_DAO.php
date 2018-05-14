@@ -56,4 +56,33 @@ class PP_DAO {
         $arr = array(':main_id' => $main_id);
         $this->PDOX->queryDie($query, $arr);
     }
+
+    function editTitle($main_id, $question_title)
+    {
+        $query = "UPDATE {$this->p}pp_question set question_title = :question_title where main_id = :main_id;";
+        $arr = array(':main_id' => $main_id, ':question_title' => $question_title);
+        $this->PDOX->queryDie($query, $arr);
+        return $this->PDOX->lastInsertId();
+    }
+    function editPreQuestion($main_id, $pre_question)
+    {
+        $query = "UPDATE {$this->p}pp_question set pre_question = :pre_question where main_id = :main_id;";
+        $arr = array(':main_id' => $main_id, ':pre_question' => $pre_question);
+        $this->PDOX->queryDie($query, $arr);
+        return $this->PDOX->lastInsertId();
+    }
+    function editPostQuestion($main_id, $post_question)
+    {
+        $query = "UPDATE {$this->p}pp_question set post_question = :post_question where main_id = :main_id;";
+        $arr = array(':main_id' => $main_id, ':post_question' => $post_question);
+        $this->PDOX->queryDie($query, $arr);
+        return $this->PDOX->lastInsertId();
+    }
+    function editWrapUpText($main_id, $wrap_up_text, $show_wrap_up_text)
+    {
+        $query = "UPDATE {$this->p}pp_question set wrap_up_text = :wrap_up_text, show_wrap_up_text = :show_wrap_up_text where main_id = :main_id;";
+        $arr = array(':main_id' => $main_id, ':wrap_up_text' => $wrap_up_text, ':show_wrap_up_text' => $show_wrap_up_text);
+        $this->PDOX->queryDie($query, $arr);
+        return $this->PDOX->lastInsertId();
+    }
 }
