@@ -50,13 +50,6 @@ class PP_DAO {
         return $this->PDOX->rowDie($query, $arr);
     }
 
-    function getStudentAnswers($question_id, $user_id)
-    {
-        $query = "SELECT * FROM {$this->p}pp_answer WHERE question_id = :question_id AND user_id = :user_id;";
-        $arr = array(':question_id' => $question_id, ':user_id' => $user_id);
-        return $this->PDOX->rowDie($query, $arr);
-    }
-
     //Modified for testing currently. Will use question_id later
     function deleteQuestion($main_id) {
         $query = "DELETE FROM {$this->p}pp_question WHERE main_id = :main_id;";
@@ -89,6 +82,37 @@ class PP_DAO {
     {
         $query = "UPDATE {$this->p}pp_question set wrap_up_text = :wrap_up_text, show_wrap_up_text = :show_wrap_up_text where main_id = :main_id;";
         $arr = array(':main_id' => $main_id, ':wrap_up_text' => $wrap_up_text, ':show_wrap_up_text' => $show_wrap_up_text);
+        $this->PDOX->queryDie($query, $arr);
+        return $this->PDOX->lastInsertId();
+    }
+
+    function getStudentAnswers($question_id, $user_id)
+    {
+        $query = "SELECT * FROM {$this->p}pp_answer WHERE question_id = :question_id AND user_id = :user_id;";
+        $arr = array(':question_id' => $question_id, ':user_id' => $user_id);
+        return $this->PDOX->rowDie($query, $arr);
+    }
+
+    function answerPreQuestion($user_id, $question_ID, $pre_answer)
+    {
+        $query = "INSERT INTO {$this->p}pp_answer (user_id, question_id, pre_answer, pre_modified) VALUES (:user_id, :question_id, :pre_answer, now());";
+        $arr = array(':user_id' => $user_id, ':question_id' => $question_ID, ':pre_answer' => $pre_answer);
+        $this->PDOX->queryDie($query, $arr);
+        return $this->PDOX->lastInsertId();
+    }
+
+    function answerPostQuestion($user_id, $question_ID, $post_answer)
+    {
+        $query = "UPDATE {$this->p}pp_answer set post_answer = :post_answer, post_modified = now() where user_id = :user_id AND question_ID = :question_ID;";
+        $arr = array(':user_id' => $user_id, ':question_ID' => $question_ID, ':post_answer' => $post_answer);
+        $this->PDOX->queryDie($query, $arr);
+        return $this->PDOX->lastInsertId();
+    }
+
+    function answerWrapUpText($user_id, $question_ID, $wrap_up_answer)
+    {
+        $query = "UPDATE {$this->p}pp_answer set wrap_up_answer = :wrap_up_answer, wrap_up_modified = now() where user_id = :user_id AND question_ID = :question_ID;";
+        $arr = array(':user_id' => $user_id, ':question_ID' => $question_ID, ':wrap_up_answer' => $wrap_up_answer);
         $this->PDOX->queryDie($query, $arr);
         return $this->PDOX->lastInsertId();
     }
