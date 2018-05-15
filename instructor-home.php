@@ -40,7 +40,7 @@ if ($USER->instructor) {
             <div class="col-sm-6 text-right question-actions">
                 <a class="btn btn-primary"  data-toggle="modal">Preview</a>
                 <a href="#Edit_Title" class="btn btn-success" data-toggle="modal">Edit</a>
-                <a class="btn btn-danger" action="actions/removequestion.php">
+                <a class="btn btn-danger" action="actions/RemoveQuestion.php">
                     <span class="fa fa-trash"></span>
                 </a>
             </div>
@@ -51,7 +51,7 @@ if ($USER->instructor) {
                         <div class="modal-header">
                             <h4 class="modal-title">Edit Question Title</h4>
                         </div>
-                        <form method="post"  action="actions/editquestion.php">
+                        <form method="post"  action="actions/EditQuestion.php">
                                 <div class="modal-body">
                                     <input type="hidden" name="question_title" value="question_title"/>
                                     <textarea class="form-control" name="titleText" rows="4" autofocus required>' . $question["question_title"] . '</textarea>
@@ -80,7 +80,7 @@ if ($USER->instructor) {
             <div class="col-sm-3 text-right question-actions">
                 <a class="btn btn-primary"  data-toggle="modal">Report</a>
                 <a href="#Edit_Pre_Question" class="btn btn-success" data-toggle="modal">Edit</a>
-                <a class="btn btn-danger" action="actions/removequestion.php">
+                <a class="btn btn-danger" action="actions/RemoveQuestion.php">
                     <span class="fa fa-trash"></span>
                 </a>
             </div>
@@ -91,7 +91,7 @@ if ($USER->instructor) {
                         <div class="modal-header">
                             <h4 class="modal-title">Edit Pre Question Text</h4>
                         </div>
-                        <form method="post"  action="actions/editquestion.php">
+                        <form method="post"  action="actions/EditQuestion.php">
                                 <div class="modal-body">
                                     <input type="hidden" name="pre_question" value="pre_question"/>
                                     <textarea class="form-control" name="preQuestion" rows="4" autofocus required>' . $question["pre_question"] . '</textarea>
@@ -119,7 +119,7 @@ if ($USER->instructor) {
             <div class="col-sm-3 text-right question-actions">
                 <a class="btn btn-primary"  data-toggle="modal">Report</a>
                 <a href="#Edit_Post_Question" class="btn btn-success" data-toggle="modal">Edit</a>
-                <a class="btn btn-danger" action="actions/removequestion.php">
+                <a class="btn btn-danger" action="actions/RemoveQuestion.php">
                     <span class="fa fa-trash"></span>
                 </a>
             </div>
@@ -130,7 +130,7 @@ if ($USER->instructor) {
                         <div class="modal-header">
                             <h4 class="modal-title">Edit Post Question Text</h4>
                         </div>
-                        <form method="post"  action="actions/editquestion.php">
+                        <form method="post"  action="actions/EditQuestion.php">
                                 <div class="modal-body">
                                     <input type="hidden" name="post_question" value="post_question"/>
                                     <textarea class="form-control" name="postQuestion" rows="4" autofocus required>' . $question["post_question"] . '</textarea>
@@ -162,7 +162,7 @@ if ($USER->instructor) {
             <div class="col-sm-3 text-right question-actions">
                 <a class="btn btn-primary"  data-toggle="modal">Report</a>
                 <a href="#Edit_Wrap_Up_Text" class="btn btn-success" data-toggle="modal">Edit</a>
-                <a class="btn btn-danger" action="actions/removequestion.php">
+                <a class="btn btn-danger" action="actions/RemoveQuestion.php">
                     <span class="fa fa-trash"></span>
                 </a>
             </div>
@@ -173,7 +173,7 @@ if ($USER->instructor) {
                         <div class="modal-header">
                             <h4 class="modal-title">Edit Wrap Up Question Text</h4>
                         </div>
-                        <form method="post"  action="actions/editquestion.php">
+                        <form method="post"  action="actions/EditQuestion.php">
                                 <div class="modal-body">
                                     <input type="hidden" name="wrap_up_text" value="wrap_up_text"/>
                                     <textarea class="form-control" name="wrapUpQuestion" rows="4" autofocus required>' . $question["wrap_up_text"] . '</textarea>
