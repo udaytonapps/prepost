@@ -28,26 +28,28 @@ include("menu.php");
 $user_ID = $USER->id;
 $question = $PP_DAO->getQuestion($main_Id);
 $student_answer = $PP_DAO->getStudentAnswers($question["question_id"],$user_ID);
+
 echo('<div class="container-fluid">
     <div class="row"><h2>' .$question["question_title"].'</h2></div>
-    <div id="exit_page_container">
-        <div class="row">    
-            <a href="pre-question.php">
-                   <input type="submit" class="btn btn-success" value="Pre Question">             
-            </a>
-        </div>
-        <div class="row">  
-            <a href="post-question.php">
-                   <input type="submit" class="btn btn-success" value="Post Question">             
-            </a>
-        </div>
-        <div class="row">  
-            <a href="wrap-up-question.php">
-                   <input type="submit" class="btn btn-success" value="Wrap up">             
-            </a>
+    <div id="pre_answer_container">
+        <div class="row"><h4>' .$question["pre_question"]. '</h4></div>
+        <div class="row">      
+             <form method="post"  action="actions/AddAnswer.php">
+                    <div class="modal-body">
+                        <input type="hidden" name="pre_answer" value="pre_answer" id="pre_answer"/>
+                        <textarea class="form-control" name="pre_answer_text" rows="4" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
+                    </div>
+                    <div class="modal-footer" id="pre_answer_container_footer">
+                        <a href="student-home.php"> 
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </a>   
+                        <input type="submit" class="btn btn-success" value="Save">
+                    </div>
+            </form>
         </div>
     </div>
 </div>');
+
 ////////////////////////////-/////////////////////////////
 $OUTPUT->footerStart();
 ?>
@@ -55,4 +57,3 @@ $OUTPUT->footerStart();
     <script src="scripts/main.js" type="text/javascript"></script>
 <?php
 $OUTPUT->footerEnd();
-

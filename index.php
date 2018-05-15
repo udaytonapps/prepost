@@ -42,7 +42,7 @@ if ($USER->instructor) {
                     <h3>Create Pre/Post Reflection</h3>
                 </div>
                 <div class="col-sm-8 col-sm-offset-2">
-                    <form method="post" id="addPrePostForm"action="actions/addquestion.php">
+                    <form method="post" id="addPrePostForm"action="actions/AddQuestion.php">
                         <div class="form-group">
                             <p>
                                 This tool allows faculty to define a question to answer on two different occasions - before and after
