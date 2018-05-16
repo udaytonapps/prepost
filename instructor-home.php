@@ -69,20 +69,17 @@ if ($USER->instructor) {
         <div id="questionContainer">
         <!--Pre Question-->
         <div class="row">  
-            <div class="col-sm-8 col-sm-offset-1 question-text">    
+            <div class="col-sm-9 col-sm-offset-1 question-text">
             <h4>Pre Question</h4>
             </div>
         </div>
         <div class="row">          
-            <div class="col-sm-8 col-sm-offset-1 question-text">    
+            <div class="col-sm-9 col-sm-offset-1 question-text">
             <textarea class="form-control" name="Question" rows="4" disabled="disabled">' . $question["pre_question"] . '</textarea>
             </div>
-            <div class="col-sm-3 text-right question-actions">
+            <div class="col-sm-2 text-right question-actions">
                 <a class="btn btn-primary"  data-toggle="modal">Report</a>
                 <a href="#Edit_Pre_Question" class="btn btn-success" data-toggle="modal">Edit</a>
-                <a class="btn btn-danger" action="actions/RemoveQuestion.php">
-                    <span class="fa fa-trash"></span>
-                </a>
             </div>
             <!-- Edit pre Question Text Modal -->
             <div class="modal fade" id="Edit_Pre_Question" tabindex="-1" role="dialog" aria-hidden="true">
@@ -107,21 +104,18 @@ if ($USER->instructor) {
         </div>
         
         <!--Post Question-->
-        <div class="row">     
-            <div class="col-sm-8 col-sm-offset-1 question-text">    
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-1 question-text">
             <h4>Post Question</h4>
             </div>
         </div>
         <div class="row">             
-            <div class="col-sm-8 col-sm-offset-1 question-text">    
+            <div class="col-sm-9 col-sm-offset-1 question-text">
             <textarea class="form-control" name="Question" rows="4" disabled="disabled">' . $question["post_question"] . '</textarea>
             </div>
-            <div class="col-sm-3 text-right question-actions">
+            <div class="col-sm-2 text-right question-actions">
                 <a class="btn btn-primary"  data-toggle="modal">Report</a>
                 <a href="#Edit_Post_Question" class="btn btn-success" data-toggle="modal">Edit</a>
-                <a class="btn btn-danger" action="actions/RemoveQuestion.php">
-                    <span class="fa fa-trash"></span>
-                </a>
             </div>
             <!-- Edit Post Question Text Modal -->
             <div class="modal fade" id="Edit_Post_Question" tabindex="-1" role="dialog" aria-hidden="true">
@@ -145,26 +139,23 @@ if ($USER->instructor) {
             </div>
         </div>
         <div class="row">     
-            <div class="col-sm-8 col-sm-offset-1 question-text">    
+            <div class="col-sm-9 col-sm-offset-1 question-text">
             <h4>Wrap Up Question</h4>
             </div>
         </div>
         <!--Wrap up question--> 
         <div class="row">     
-            <div class="col-sm-8 col-sm-offset-1 question-text">    
+            <div class="col-sm-9 col-sm-offset-1 question-text">
               <p>A wrap-up question can be used to give users a third text box to reflect on how their answer changed between their pre and post entries.</p>
             </div>
         </div>
         <div class="row">        
-            <div class="col-sm-8 col-sm-offset-1 question-text">    
+            <div class="col-sm-9 col-sm-offset-1 question-text">    
             <textarea class="form-control" name="PrePostWrapUpText" id="prePostWrapUpText" rows="4" disabled="disabled">' . $question["wrap_up_text"] . '</textarea>
             </div>
-            <div class="col-sm-3 text-right question-actions">
+            <div class="col-sm-2 text-right question-actions">
                 <a class="btn btn-primary"  data-toggle="modal">Report</a>
                 <a href="#Edit_Wrap_Up_Text" class="btn btn-success" data-toggle="modal">Edit</a>
-                <a class="btn btn-danger" action="actions/RemoveQuestion.php">
-                    <span class="fa fa-trash"></span>
-                </a>
             </div>
             <!-- Edit Wrap Up Question Text Modal -->
             <div class="modal fade" id="Edit_Wrap_Up_Text" tabindex="-1" role="dialog" aria-hidden="true">
@@ -193,7 +184,7 @@ if ($USER->instructor) {
             </div>
         </div>
         <div class="row">     
-            <div class="col-sm-8 col-sm-offset-1 check-box">    
+            <div class="col-sm-9 col-sm-offset-1 check-box">
                 <p class="checkbox">
                     <label><h4><input type="checkbox" name="show_wrap_up_text" id="show_wrap_up_text" disabled="disabled" ' . $checked . '>
                     Include Wrap-up Question
