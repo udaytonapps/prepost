@@ -116,4 +116,18 @@ class PP_DAO {
         $this->PDOX->queryDie($query, $arr);
         return $this->PDOX->lastInsertId();
     }
+
+    function getAllStudentAnswers($question_id)
+    {
+        $query = "SELECT * FROM {$this->p}pp_answer WHERE question_id = :question_id;";
+        $arr = array(':question_id' => $question_id);
+        return $this->PDOX->allRowsDie($query, $arr);
+    }
+
+    function findDisplayName($user_id) {
+        $query = "SELECT displayname FROM {$this->p}lti_user WHERE user_id = :user_id;";
+        $arr = array(':user_id' => $user_id);
+        $context = $this->PDOX->rowDie($query, $arr);
+        return $context["displayname"];
+    }
 }

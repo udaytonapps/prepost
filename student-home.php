@@ -32,183 +32,89 @@ echo('<div class="container-fluid">
     <div class="row"><h2>' .$question["question_title"].'</h2></div>
     <div class="row"><p>PLACEHOLDER TEXT</p></div>
     </div>');
+
+$status = 0;//0 = no answers 1 = pre done 2 = pre and post done(No wrap up question) 3 = pre and post done (wrap up question) 4 = all done
+$wrapUpStatus = 0;
+
+if($question["show_wrap_up_text"]==1){
+    $wrapUpStatus = 1;
+}
 if (!isset($student_answer["pre_modified"])) {
-    echo('<div class="container-fluid">
-    <div class="list-group">
-        <a href="pre-question.php" class="list-group-item list-group-item-info">
-        <div class="row">             
-            <div class="col-sm-12 col-sm-offset-1 question-text">    
-                <h4 class="list-group-item-heading">Pre Question</h4>
-                <p class="list-group-item-text">Answer prior to the course</p>
-            </div>
-        </div>
-        </a>
-        <a href="post-question.php" class="list-group-item disabled">
-        <div class="row">             
-            <div class="col-sm-12 col-sm-offset-1 question-text">  
-              <h4 class="list-group-item-heading">Post Question</h4>
-              <p class="list-group-item-text">Answer after the course</p>
-              </div>
-          </div>
-        </a>
-        ');
-        if($question["show_wrap_up_text"]==1)
-        echo('
-        <a href="wrap-up-question.php" class="list-group-item disabled">
-        <div class="row">             
-            <div class="col-sm-12 col-sm-offset-1 question-text">  
-          <h4 class="list-group-item-heading">Wrap Up Question</h4>
-          <p class="list-group-item-text">Answer after the other two questions</p>
-          </div>
-          </div>
-        </a>
-        ');
-    echo('
-    </div>
-</div>');
+    $status = 0;
 }else if(!isset($student_answer["post_answer"])) {
-    echo('<div class="container-fluid">
-    <div class="list-group">
-        <a href="pre-question.php" class="list-group-item disabled">
-        <div class="row">             
-            <div class="col-sm-1 question-text">   
-                <span class="fa fa-3x fa-check"></span>
-            </div>
-            <div class="col-sm-11 question-text">   
-                <h4 class="list-group-item-heading">Pre Question</h4>
-                <p class="list-group-item-text">Answer prior to the course</p>
-            </div>
-        </div>
-        </a>
-        <a href="post-question.php" class="list-group-item  list-group-item-info">
-        <div class="row">             
-            <div class="col-sm-12 col-sm-offset-1 question-text">  
-              <h4 class="list-group-item-heading">Post Question</h4>
-              <p class="list-group-item-text">Answer after the course</p>
-              </div>
-          </div>
-        </a>
-         ');
-        if($question["show_wrap_up_text"]==1)
-        echo('
-        <a href="wrap-up-question.php" class="list-group-item disabled">
-        <div class="row">             
-            <div class="col-sm-12 col-sm-offset-1 question-text">  
-          <h4 class="list-group-item-heading">Wrap Up Question</h4>
-          <p class="list-group-item-text">Answer after the other two questions</p>
-          </div>
-          </div>
-        </a>
-        ');
-    echo('
-    </div>
-</div>');
-}else if($question["show_wrap_up_text"]==1) {
-    if(!isset($student_answer["wrap_up_answer"])) {
-        echo('<div class="container-fluid">
-        <div class="list-group">
-            <a href="pre-question.php" class="list-group-item disabled">
-            <div class="row">             
-                <div class="col-sm-1 question-text">   
-                    <span class="fa fa-3x fa-check"></span>
-                </div>
-                <div class="col-sm-11 question-text">   
-                    <h4 class="list-group-item-heading">Pre Question</h4>
-                    <p class="list-group-item-text">Answer prior to the course</p>
-                </div>
-            </div>
-            </a>
-            <a href="post-question.php" class="list-group-item disabled">
-            <div class="row">             
-                <div class="col-sm-1 question-text">   
-                    <span class="fa fa-3x fa-check"></span>
-                </div>
-                <div class="col-sm-11 question-text">   
-                  <h4 class="list-group-item-heading">Post Question</h4>
-                  <p class="list-group-item-text">Answer after the course</p>
-                  </div>
-              </div>
-            </a>
-            <a href="wrap-up-question.php" class="list-group-item list-group-item-info">
-            <div class="row">             
-                <div class="col-sm-12 col-sm-offset-1 question-text">  
-              <h4 class="list-group-item-heading">Wrap Up Question</h4>
-              <p class="list-group-item-text">Answer after the other two questions</p>
-              </div>
-              </div>
-            </a>
-        </div>
-        </div>');
-    }else {
-        echo('<div class="container-fluid">
-        <div class="list-group">
-            <a href="pre-question.php" class="list-group-item disabled">
-            <div class="row">             
-                <div class="col-sm-1 question-text">   
-                    <span class="fa fa-3x fa-check"></span>
-                </div>
-                <div class="col-sm-11 question-text">   
-                    <h4 class="list-group-item-heading">Pre Question</h4>
-                    <p class="list-group-item-text">Answer prior to the course</p>
-                </div>
-            </div>
-            </a>
-            <a href="post-question.php" class="list-group-item disabled">
-            <div class="row">             
-                <div class="col-sm-1 question-text">   
-                    <span class="fa fa-3x fa-check"></span>
-                </div>
-                <div class="col-sm-11 question-text">   
-                  <h4 class="list-group-item-heading">Post Question</h4>
-                  <p class="list-group-item-text">Answer after the course</p>
-                  </div>
-              </div>
-            </a>
-            <a href="wrap-up-question.php" class="list-group-item disabled">
-            <div class="row">             
-                <div class="col-sm-1 question-text">   
-                    <span class="fa fa-3x fa-check"></span>
-                </div>
-                <div class="col-sm-11 question-text">  
-              <h4 class="list-group-item-heading">Wrap Up Question</h4>
-              <p class="list-group-item-text">Answer after the other two questions</p>
-              </div>
-              </div>
-            </a>
-        </div>
-        </div>');
+    $status = 1;
+}else if ($wrapUpStatus == 1){
+    if(!isset($student_answer["wrap_up_answer"])){
+        $status = 3;
+    } else {
+        $status = 4;
     }
 }else {
-    echo('<div class="container-fluid">
-        <div class="list-group">
-            <a href="pre-question.php" class="list-group-item disabled">
-            <div class="row">             
-                <div class="col-sm-1 question-text ">   
-                    <span class="fa fa-3x fa-check"></span>
-                </div>
-                <div class="col-sm-11 question-text">   
-                    <h4 class="list-group-item-heading"><span class="text-muted">Pre Question</span></h4>
-                    <p class="list-group-item-text text-muted">Answer prior to the course</p>
-                </div>
-            </div>
-            </a>
-            <a href="post-question.php" class="list-group-item disabled">
-            <div class="row">             
-                <div class="col-sm-1 question-text">   
-                    <span class="fa fa-3x fa-check"></span>
-                </div>
-                <div class="col-sm-11 question-text text-muted">   
-                  <h4 class="list-group-item-heading">Post Question</h4>
-                  <p class="list-group-item-text">Answer after the course</p>
-                  </div>
-              </div>
-            </a>
-        </div>
-        </div>');
+    $status = 2;
 }
 
-
-
+echo('<div class="container-fluid">
+    <div class="list-group">');
+    if($status == 0){
+        echo('<a href="pre-question.php" class="list-group-item list-group-item-info">
+            <div class="row">
+                <div class="col-sm-1 question-text"></div>');
+    } else {
+        echo('<a href="pre-question.php" class="list-group-item disabled">
+                <div class="row">
+                    <div class="col-sm-1 question-text"><span class="fa fa-3x fa-check"></span></div>');
+    }
+    echo('
+        <div class="col-sm-11 question-text">   
+            <h4 class="list-group-item-heading">Pre Question</h4>
+            <p class="list-group-item-text">Answer prior to the course</p>
+        </div>
+    </div>
+    </a>');
+    if($status == 1){
+        echo('<a href="post-question.php" class="list-group-item list-group-item-info">
+            <div class="row">
+                <div class="col-sm-1 question-text"></div>');
+    } else {
+        echo('<a href="post-question.php" class="list-group-item disabled">
+                <div class="row">');
+        if($status > 1){
+            echo('<div class="col-sm-1 question-text"><span class="fa fa-3x fa-check"></span></div>');
+        }else{
+            echo('<div class="col-sm-1 question-text"></div>');
+        }
+    }
+    echo('<div class="col-sm-11 question-text">  
+            <h4 class="list-group-item-heading">Post Question</h4>
+            <p class="list-group-item-text">Answer after the course</p>
+            </div>
+        </div>
+        </a>');
+    if($wrapUpStatus==1) {
+        if($status == 3){
+            echo('<a href="wrap-up-question.php" class="list-group-item list-group-item-info">
+            <div class="row">
+                <div class="col-sm-1 question-text"></div>');
+        } else {
+            echo('<a href="wrap-up-question.php" class="list-group-item disabled">
+                <div class="row">');
+            if($status > 3){
+                echo('<div class="col-sm-1 question-text"><span class="fa fa-3x fa-check"></span></div>');
+            }else{
+                echo('<div class="col-sm-1 question-text"></div>');
+            }
+        }
+        echo('<div class="col-sm-11 question-text">  
+          <h4 class="list-group-item-heading">Wrap Up Question</h4>
+          <p class="list-group-item-text">Answer after the other two questions</p>
+          </div>
+          </div>
+        </a>
+        ');
+    }
+    echo('
+    </div>
+</div>');
 
 ////////////////////////////-/////////////////////////////
 $OUTPUT->footerStart();

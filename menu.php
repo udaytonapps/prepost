@@ -1,6 +1,7 @@
 <?php
 $menu = array(
-    'instructor-home.php' => 'View All Results'
+    'instructor-home.php' => 'Instructor Home',
+    'student-results.php' => 'Student Results'
 );
 ?>
 

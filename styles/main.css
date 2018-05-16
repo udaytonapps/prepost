@@ -17,3 +17,6 @@
 .list-group-item.disabled:focus .list-group-item-text {
     color: #777;
 }
+.list-group-item.dark{
+    background-color: #eee;
+}

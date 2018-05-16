@@ -28,49 +28,52 @@ include("menu.php");
 $user_ID = $USER->id;
 $question = $PP_DAO->getQuestion($main_Id);
 $student_answer = $PP_DAO->getStudentAnswers($question["question_id"],$user_ID);
-
-echo('<div class="container-fluid">
-<div class="row"><h2>' .$question["question_title"].'</h2></div>
-    <div id="pre_answer_container">
-        <div class="row"><h4>' .$question["pre_question"]. '</h4></div>
-        <div class="row">      
-             <form method="post"  action="actions/AddAnswer.php">
-                <div class="modal-body">
-                    <input type="hidden" name="pre_answer" value="pre_answer" id="pre_answer"/>
-                    <textarea class="form-control" name="pre_answer_text" rows="4" disabled="disabled" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
-                </div>
-            </form>
+if(isset($student_answer["wrap_up_answer"])){
+    header('Location: ' . addSession('student-home.php'));
+} else {
+    echo('<div class="container-fluid">
+        <div class="row"><h2>' . $question["question_title"] . '</h2></div>
+        <div id="pre_answer_container">
+            <div class="row"><h4>' . $question["pre_question"] . '</h4></div>
+            <div class="row">
+                <form method="post"  action="actions/AddAnswer.php">
+                    <div class="modal-body">
+                        <input type="hidden" name="pre_answer" value="pre_answer" id="pre_answer"/>
+                        <textarea class="form-control" name="pre_answer_text" rows="4" disabled="disabled" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-    <div id="post_answer_container">
-        <div class="row"><h4>' .$question["post_question"]. '</h4></div>
-        <div class="row">      
-             <form method="post"  action="actions/AddAnswer.php">
-                <div class="modal-body">
-                    <input type="hidden" name="post_answer" value="post_answer" id="post_answer"/>
-                    <textarea class="form-control" name="post_answer_text" rows="4" disabled="disabled" autofocus required>' .$student_answer["post_answer"].'</textarea>
-                </div>
-            </form>
+        <div id="post_answer_container">
+            <div class="row"><h4>' . $question["post_question"] . '</h4></div>
+            <div class="row">
+                <form method="post"  action="actions/AddAnswer.php">
+                    <div class="modal-body">
+                        <input type="hidden" name="post_answer" value="post_answer" id="post_answer"/>
+                        <textarea class="form-control" name="post_answer_text" rows="4" disabled="disabled" autofocus required>' . $student_answer["post_answer"] . '</textarea>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-    <div id="wrap_up_answer_container">
-        <div class="row"><h4>' .$question["wrap_up_text"]. '</h4></div>
-        <div class="row">      
-             <form method="post"  action="actions/AddAnswer.php">
-                <div class="modal-body">
-                    <input type="hidden" name="wrap_up_answer" value="wrap_up_answer" id="wrap_up_answer"/>
-                    <textarea class="form-control" name="wrap_up_answer_text" rows="4" autofocus required>' .$student_answer["wrap_up_answer"].'</textarea>
-                </div>
-                <div class="modal-footer" id="wrap_up_answer_container_footer">
-                    <a href="student-home.php"> 
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                     </a>
-                    <input type="submit" class="btn btn-success" value="Save">
-                </div>
-            </form>
+        <div id="wrap_up_answer_container">
+            <div class="row"><h4>' . $question["wrap_up_text"] . '</h4></div>
+            <div class="row">
+                <form method="post"  action="actions/AddAnswer.php">
+                    <div class="modal-body">
+                        <input type="hidden" name="wrap_up_answer" value="wrap_up_answer" id="wrap_up_answer"/>
+                        <textarea class="form-control" name="wrap_up_answer_text" rows="4" autofocus required>' . $student_answer["wrap_up_answer"] . '</textarea>
+                    </div>
+                    <div class="modal-footer" id="wrap_up_answer_container_footer">
+                        <a href="student-home.php">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </a>
+                        <input type="submit" class="btn btn-success" value="Save">
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</div>');
+    </div>');
+}
 ////////////////////////////-/////////////////////////////
 $OUTPUT->footerStart();
 ?>
