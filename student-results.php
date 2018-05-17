@@ -69,7 +69,38 @@ if($USER->instructor){
                     echo('<div class="col-sm-3">');
                 }else{
                     echo('<div class="col-sm-4">');
-                }echo('' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '</div>');
+                }echo('<a  data-target="#' . $answers[$i]["user_id"] . '_All"  data-toggle="modal">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '</a></div>
+                            <div class="modal fade" id="' . $answers[$i]["user_id"] . '_All" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '\'s Question Answers</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row lines">
+                                                <input type="hidden" name="pre_question" value="pre_question"/>
+                                                <h4>Pre Question Answer</h4>
+                                                <p>' . $answers[$i]["pre_answer"] . '</p>
+                                            </div>
+                                            <div class="row lines">
+                                                <h4>Post Question Answer</h4>
+                                                <input type="hidden" name="pre_question" value="pre_question"/>
+                                                <p>' . $answers[$i]["post_answer"] . '</p>
+                                            </div>');
+                                            if($wrapup == 1) {
+                                                echo('<div class="row lines">
+                                                    <h4>Wrap Up Question Answer</h4>
+                                                    <input type="hidden" name="pre_question" value="pre_question"/>
+                                                    <p>' . $answers[$i]["wrap_up_answer"] . '</p>
+                                                </div>');
+                                            }
+                                        echo('</div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success" data-dismiss="modal">Exit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>');
             if (isset($answers[$i]["pre_answer"])) {
                 if($wrapup == 1) {
                     echo('<div class="col-sm-3">');
