@@ -42,9 +42,9 @@ if ($USER->instructor) {
             <div class="col-sm-6 text-right question-actions">
                 <a class="btn btn-primary"  data-toggle="modal">Preview</a>
                 <a href="#Edit_Title" class="btn btn-success" data-toggle="modal">Edit</a>
-                <!--a class="btn btn-danger" action="actions/RemoveQuestion.php">
-                    <span class="fa fa-trash"></span>
-                </a-->
+                <a href="actions/RemoveQuestion.php" class="btn btn-danger delete-video" onclick="return PrePostJS.deleteQuestionConfirm();">
+                    <span class="fa fa-trash" aria-hidden="true" title="Delete Question"></span><span class="sr-only">Delete Question</span>
+                </a>
             </div>
             <!-- Edit Question Title Modal -->
             <div class="modal fade" id="Edit_Title" tabindex="-1" role="dialog" aria-hidden="true">

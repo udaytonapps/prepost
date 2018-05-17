@@ -2,17 +2,9 @@
 var PrePostJS = (function () {
     var prePostJS = {};
 
-
-    prePostJS.toggleWrapUpTextBox = function () {
-        if(document.getElementById('prePostWrapUpText').disabled)
-        {
-            document.getElementById('prePostWrapUpText').disabled=false;
-        }
-        else {
-            document.getElementById('prePostWrapUpText').disabled=true;
-        }
+    prePostJS.deleteQuestionConfirm = function () {
+        return confirm("Are you sure you want to delete this question and all associated answers? This cannot be undone.");
     };
-
 
     return prePostJS;
 })();
