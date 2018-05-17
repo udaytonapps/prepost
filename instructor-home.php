@@ -27,6 +27,8 @@ $OUTPUT->bodyStart();
 include("menu.php");
 
 $question = $PP_DAO->getQuestion($main_Id);
+$answers = $PP_DAO->getAllStudentAnswers($question["question_id"]);
+$numAnswers =sizeof($answers);
 
 if($question["show_wrap_up_text"]== 1){
     $checked = "checked";
@@ -40,9 +42,9 @@ if ($USER->instructor) {
             <div class="col-sm-6 text-right question-actions">
                 <a class="btn btn-primary"  data-toggle="modal">Preview</a>
                 <a href="#Edit_Title" class="btn btn-success" data-toggle="modal">Edit</a>
-                <a class="btn btn-danger" action="actions/RemoveQuestion.php">
+                <!--a class="btn btn-danger" action="actions/RemoveQuestion.php">
                     <span class="fa fa-trash"></span>
-                </a>
+                </a-->
             </div>
             <!-- Edit Question Title Modal -->
             <div class="modal fade" id="Edit_Title" tabindex="-1" role="dialog" aria-hidden="true">
@@ -65,7 +67,7 @@ if ($USER->instructor) {
                 </div>
             </div>
         </div>
-        
+
         <div id="questionContainer">
         <!--Pre Question-->
         <div class="row">  
@@ -78,7 +80,7 @@ if ($USER->instructor) {
             <textarea class="form-control" name="Question" rows="4" disabled="disabled">' . $question["pre_question"] . '</textarea>
             </div>
             <div class="col-sm-2 text-right question-actions">
-                <a class="btn btn-primary"  data-toggle="modal">Report</a>
+                <a href="#Pre_Question_Report" class="btn btn-primary"  data-toggle="modal">Report(' .$numAnswers. ')</a>
                 <a href="#Edit_Pre_Question" class="btn btn-success" data-toggle="modal">Edit</a>
             </div>
             <!-- Edit pre Question Text Modal -->
@@ -101,8 +103,46 @@ if ($USER->instructor) {
                     </div>
                 </div>
             </div>
+
+            <!-- Pre_Question_Report Modal -->
+            <div class="modal fade" id="Pre_Question_Report" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary ">
+                            <button type="button" class="close" data-dismiss="modal"><span class="fa fa-times bg-primary" aria-hidden="true"></span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Pre-Question Report</h4>
+                        </div>
+                        <div class="modal-body student-answers">');
+                            $i = 0;
+                            if ($numAnswers === 0) {
+                                echo('<h4 class=\'text-center\'><em>No students have answered this question yet.</em></h4>');
+                            } else {
+                                foreach ( $answers as $inner_array ) {
+                                    $UserID = $answers[$i]["user_id"];
+
+                                    $displayName = $PP_DAO->findDisplayName($UserID);
+
+                                    $answerText = $answers[$i]["pre_answer"];
+                                    $answerDate = new DateTime($answers[$i]["pre_modified"]);
+
+                                    $formattedDate = $answerDate->format("m-d-y")." at ".$answerDate->format("h:i A");
+
+                                    echo('<div class="row lines">
+                                        <div class="col-sm-3"><strong>'.$displayName.'</strong><br /><small>'.$formattedDate.'</small></div>
+                                        <div class="col-sm-9">'.$answerText.'</div>
+                                      </div>');
+                                    $i++;
+                                }
+                            }
+                        echo('</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+
         <!--Post Question-->
         <div class="row">
             <div class="col-sm-9 col-sm-offset-1 question-text">
@@ -114,7 +154,7 @@ if ($USER->instructor) {
             <textarea class="form-control" name="Question" rows="4" disabled="disabled">' . $question["post_question"] . '</textarea>
             </div>
             <div class="col-sm-2 text-right question-actions">
-                <a class="btn btn-primary"  data-toggle="modal">Report</a>
+                <a href="#Post_Question_Report" class="btn btn-primary"  data-toggle="modal">Report(' .$numAnswers. ')</a>
                 <a href="#Edit_Post_Question" class="btn btn-success" data-toggle="modal">Edit</a>
             </div>
             <!-- Edit Post Question Text Modal -->
@@ -137,6 +177,45 @@ if ($USER->instructor) {
                     </div>
                 </div>
             </div>
+
+            <!-- Post_Question_Report Modal -->
+            <div class="modal fade" id="Post_Question_Report" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary ">
+                            <button type="button" class="close" data-dismiss="modal"><span class="fa fa-times bg-primary" aria-hidden="true"></span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Post-Question Report</h4>
+                        </div>
+                        <div class="modal-body student-answers">');
+                            $i = 0;
+                            if ($numAnswers === 0) {
+                                echo('<h4 class=\'text - center\'><em>No students have answered this question yet.</em></h4>');
+                            } else {
+                                foreach ( $answers as $inner_array ) {
+                                    $UserID = $answers[$i]["user_id"];
+
+                                    $displayName = $PP_DAO->findDisplayName($UserID);
+
+                                    $answerText = $answers[$i]["post_answer"];
+                                    $answerDate = new DateTime($answers[$i]["post_modified"]);
+
+                                    $formattedDate = $answerDate->format("m-d-y")." at ".$answerDate->format("h:i A");
+
+                                    echo('<div class="row lines">
+                                        <div class="col-sm-3"><strong>'.$displayName.'</strong><br /><small>'.$formattedDate.'</small></div>
+                                        <div class="col-sm-9">'.$answerText.'</div>
+                                      </div>');
+                                    $i++;
+                                }
+                            }
+                        echo('</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="row">     
             <div class="col-sm-9 col-sm-offset-1 question-text">
@@ -154,7 +233,7 @@ if ($USER->instructor) {
             <textarea class="form-control" name="PrePostWrapUpText" id="prePostWrapUpText" rows="4" disabled="disabled">' . $question["wrap_up_text"] . '</textarea>
             </div>
             <div class="col-sm-2 text-right question-actions">
-                <a class="btn btn-primary"  data-toggle="modal">Report</a>
+                <a href="#Wrap_Up_Question_Report" class="btn btn-primary"  data-toggle="modal">Report(' .$numAnswers. ')</a>
                 <a href="#Edit_Wrap_Up_Text" class="btn btn-success" data-toggle="modal">Edit</a>
             </div>
             <!-- Edit Wrap Up Question Text Modal -->
@@ -179,6 +258,44 @@ if ($USER->instructor) {
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post_Question_Report Modal -->
+            <div class="modal fade" id="Wrap_Up_Question_Report" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary ">
+                            <button type="button" class="close" data-dismiss="modal"><span class="fa fa-times bg-primary" aria-hidden="true"></span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Wrap-Up-Question Report</h4>
+                        </div>
+                        <div class="modal-body student-answers">');
+                            $i = 0;
+                            if ($numAnswers === 0) {
+                                echo('<h4 class=\'text - center\'><em>No students have answered this question yet.</em></h4>');
+                            } else {
+                                foreach ( $answers as $inner_array ) {
+                                    $UserID = $answers[$i]["user_id"];
+
+                                    $displayName = $PP_DAO->findDisplayName($UserID);
+
+                                    $answerText = $answers[$i]["wrap_up_answer"];
+                                    $answerDate = new DateTime($answers[$i]["wrap_up_modified"]);
+
+                                    $formattedDate = $answerDate->format("m-d-y")." at ".$answerDate->format("h:i A");
+
+                                    echo('<div class="row lines">
+                                        <div class="col-sm-3"><strong>'.$displayName.'</strong><br /><small>'.$formattedDate.'</small></div>
+                                        <div class="col-sm-9">'.$answerText.'</div>
+                                      </div>');
+                                    $i++;
+                                }
+                            }
+                        echo('</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        </div>
                     </div>
                 </div>
             </div>
