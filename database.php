@@ -56,7 +56,7 @@ $DATABASE_INSTALL = array(
     CONSTRAINT `{$CFG->dbprefix}pp_answer_ibfk_1`
         FOREIGN KEY (`question_id`)
         REFERENCES `{$CFG->dbprefix}pp_question` (`question_id`)
-        ON UPDATE CASCADE,
+        ON DELETE CASCADE,
     
     PRIMARY KEY(answer_id)
     

@@ -50,10 +50,10 @@ class PP_DAO {
         return $this->PDOX->rowDie($query, $arr);
     }
 
-    //Modified for testing currently. Will use question_id later
-    function deleteQuestion($main_id) {
-        $query = "DELETE FROM {$this->p}pp_question WHERE main_id = :main_id;";
-        $arr = array(':main_id' => $main_id);
+    function deleteQuestion($question_id)
+    {
+        $query = "DELETE FROM {$this->p}pp_question WHERE question_id = :question_id;";
+        $arr = array(':question_id' => $question_id);
         $this->PDOX->queryDie($query, $arr);
     }
 
