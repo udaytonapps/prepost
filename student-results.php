@@ -32,10 +32,13 @@ $answers = $PP_DAO->getAllStudentAnswers($question["question_id"]);
 
 if($USER->instructor){
     echo('<div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-5 col-sm-offset-1 text-left "><h2>Student Results</h2></div>
-         </div>
-    </div>
+<div class="row">
+            <div class="col-sm-10 col-sm-offset-1 text-left "><h2>Student Results</h2></div>
+ </div>
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1 text-left ">
+        
+    
     
     <div id="post_answer_container">
             <ul class="list-group">');
@@ -47,16 +50,16 @@ if($USER->instructor){
 
     echo('<li class="list-group-item dark"><div class="row">');
     if($wrapup == 1) {
-        echo('<div class="col-sm-3">Student</div>
-              <div class="col-sm-3">Pre Answer</div>
-              <div class="col-sm-3">Post Answer</div>
-              <div class="col-sm-3" > Wrap Up Answer </div >');
+        echo('<div class="col-sm-3 text-left">Student</div>
+              <div class="col-sm-3 text-center">Pre Answer</div>
+              <div class="col-sm-3 text-center">Post Answer</div>
+              <div class="col-sm-3 text-center" > Wrap Up Answer </div >');
     } else {
-        echo('<div class="col-sm-4">Student</div>
-              <div class="col-sm-4">Pre Answer</div>
-              <div class="col-sm-4">Post Answer</div>');
+        echo('<div class="col-sm-4 text-center">Student</div>
+              <div class="col-sm-4 text-center">Pre Answer</div>
+              <div class="col-sm-4 text-center">Post Answer</div>');
     }
-   
+
     echo('</div></li>');
     foreach($answers as $inner_array){
         if ( ($i & 1) == 0 ) {
@@ -69,14 +72,14 @@ if($USER->instructor){
                     echo('<div class="col-sm-3">');
                 }else{
                     echo('<div class="col-sm-4">');
-                }echo('<a  data-target="#' . $answers[$i]["user_id"] . '_All"  data-toggle="modal">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '</a></div>
+                }echo('<a  class = "nameLink" data-target="#' . $answers[$i]["user_id"] . '_All"  data-toggle="modal">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '</a></div>
                             <div class="modal fade" id="' . $answers[$i]["user_id"] . '_All" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '\'s Question Answers</h4>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body scroll">
                                             <div class="row lines">
                                                 <input type="hidden" name="pre_question" value="pre_question"/>
                                                 <h4>Pre Question Answer</h4>
@@ -103,78 +106,31 @@ if($USER->instructor){
                         </div>');
             if (isset($answers[$i]["pre_answer"])) {
                 if($wrapup == 1) {
-                    echo('<div class="col-sm-3">');
+                    echo('<div class="col-sm-3 text-center">');
                 }else{
-                    echo('<div class="col-sm-4">');
+                    echo('<div class="col-sm-4 text-center">');
                 }
-                echo('<button type="button" data-target="#' . $answers[$i]["user_id"] . '_Pre" class="btn btn-success" data-toggle="modal">Pre Answer</button></div>
-                    <div class="modal fade" id="' . $answers[$i]["user_id"] . '_Pre" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '\'s Pre Question Answer</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <input type="hidden" name="pre_question" value="pre_question"/>
-                                    <p>' . $answers[$i]["pre_answer"] . '</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Exit</button>
-                                </div>
-                            </div>
-                        </div>
-                </div>');
+                echo('<span aria-hidden="true" class="fa fa-2x fa-check checkMark"></span></div>');
             }
             if (isset($answers[$i]["post_answer"])) {
                 if($wrapup == 1) {
-                    echo('<div class="col-sm-3">');
+                    echo('<div class="col-sm-3 text-center">');
                 }else{
-                    echo('<div class="col-sm-4">');
+                    echo('<div class="col-sm-4 text-center">');
                 }
-                echo('<button type="button" data-target="#'.$answers[$i]["user_id"].'_Post" class="btn btn-success" data-toggle="modal">Post Answer</button></div>
-                <div class="modal fade" id="'.$answers[$i]["user_id"].'_Post" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '\'s Post Question Answer</h4>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="pre_question" value="pre_question"/>
-                                <p>'.$answers[$i]["post_answer"].'</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Exit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>');
+                echo('<span aria-hidden="true" class="fa fa-2x fa-check checkMark"></span></div>');
             }
         if($wrapup == 1) {
             if (isset($answers[$i]["wrap_up_answer"])) {
-                echo('
-                <div class="col-sm-3"><button type="button" data-target="#' . $answers[$i]["user_id"] . '_WrapUp" class="btn btn-success" data-toggle="modal">Wrap Up Answer</button></div>
-                <div class="modal fade" id="' . $answers[$i]["user_id"] . '_WrapUp" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '\'s Wrap Up Question Answer</h4>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="pre_question" value="pre_question"/>
-                                <p>' . $answers[$i]["wrap_up_answer"] . '</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Exit</button>
-                            </div>
-                        </div>
-                    </div>
+                echo('<div class="col-sm-3 text-center">
+                    <span aria-hidden="true" class="fa fa-2x fa-check checkMark"></span>
                 </div>');
             }
         }
         echo('</div></li>');
         $i++;
     }
-    echo('</ul></div>');
+    echo('</ul></div></div></div>');
 }else{
     header('Location: ' . addSession('student-home.php'));
 }
