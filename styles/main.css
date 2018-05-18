@@ -28,3 +28,21 @@
     margin: 1em 0;
     border-top: 1px solid #ddd;
 }
+
+.scroll{
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 400px;
+}
+
+.done {
+    font-style: italic;
+}
+
+.checkMark {
+    color: #5cb85c;
+}
+
+.nameLink {
+    cursor: pointer;
+}

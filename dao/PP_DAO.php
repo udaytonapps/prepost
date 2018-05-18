@@ -78,10 +78,10 @@ class PP_DAO {
         $this->PDOX->queryDie($query, $arr);
         return $this->PDOX->lastInsertId();
     }
-    function editWrapUpText($main_id, $wrap_up_text, $show_wrap_up_text)
+    function editWrapUpText($main_id, $wrap_up_text)
     {
-        $query = "UPDATE {$this->p}pp_question set wrap_up_text = :wrap_up_text, show_wrap_up_text = :show_wrap_up_text where main_id = :main_id;";
-        $arr = array(':main_id' => $main_id, ':wrap_up_text' => $wrap_up_text, ':show_wrap_up_text' => $show_wrap_up_text);
+        $query = "UPDATE {$this->p}pp_question set wrap_up_text = :wrap_up_text where main_id = :main_id;";
+        $arr = array(':main_id' => $main_id, ':wrap_up_text' => $wrap_up_text);
         $this->PDOX->queryDie($query, $arr);
         return $this->PDOX->lastInsertId();
     }
@@ -129,5 +129,12 @@ class PP_DAO {
         $arr = array(':user_id' => $user_id);
         $context = $this->PDOX->rowDie($query, $arr);
         return $context["displayname"];
+    }
+
+    function toggleWrapUp($main_id, $show_wrap_up_text){
+        $query = "UPDATE {$this->p}pp_question set show_wrap_up_text = :show_wrap_up_text where main_id = :main_id;";
+        $arr = array(':main_id' => $main_id, ':show_wrap_up_text' => $show_wrap_up_text);
+        $this->PDOX->queryDie($query, $arr);
+        return $this->PDOX->lastInsertId();
     }
 }

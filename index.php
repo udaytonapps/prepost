@@ -52,7 +52,7 @@ if ($USER->instructor) {
                                 when they are entering their 'Post' answer. Finallym students will be given a final text area to reflect on
                                 how their answer has changed between their 'Pre' and 'Post' Entries
                             </p>
-                            <h4>Pre/Post Title</h4>
+                            <h4>Title</h4>
                             <input type="text" class="form-control" name="PrePostTitle" id="prePostTitleText" rows="1"></input>
                             <h4>What question would you like participants to answer Pre and Post?</h4>
                             <textarea class="form-control" name="PrePostQuestion" id="prePostQuestionText" rows="4"></textarea>

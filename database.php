@@ -37,7 +37,7 @@ $DATABASE_INSTALL = array(
         FOREIGN KEY (`main_id`)
         REFERENCES `{$CFG->dbprefix}pp_main` (`main_id`)
         ON UPDATE CASCADE,
-
+        
     PRIMARY KEY(question_id)
 	
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8"),

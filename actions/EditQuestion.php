@@ -18,12 +18,7 @@ if ($USER->instructor) {
     } else if (isset($_POST['post_question'])) {
         $PP_DAO->editPostQuestion($main_Id, "$_POST[postQuestion]");
     } else if (isset($_POST['wrap_up_text'])) {
-        if (isset($_POST['show_wrap_up_text'])) {
-            $PP_DAO->editWrapUpText($main_Id, "$_POST[wrapUpQuestion]", 1);
-        } else {
-            $showWrapUpText = 0;
-            $PP_DAO->editWrapUpText($main_Id, "$_POST[wrapUpQuestion]", 0);
-        }
+        $PP_DAO->editWrapUpText($main_Id, "$_POST[wrapUpQuestion]");
     }
     header('Location: ' . addSession('../instructor-home.php'));
 }else{

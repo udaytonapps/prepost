@@ -1,7 +1,8 @@
 <?php
 $menu = array(
-    'instructor-home.php' => 'Instructor Home',
-    'student-results.php' => 'Student Results'
+    'instructor-home.php' => '<span aria-hidden="true" class="fa fa-lg fa-wrench"></span> Manage',
+    'student-results.php' => '<span aria-hidden="true" class="fa fa-lg fa-table"></span> All Results',
+    'student-home.php'  => '<span aria-hidden="true" class="fa fa-lg fa-file-text"></span> Preview Question'
 );
 ?>
 
