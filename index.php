@@ -57,8 +57,7 @@ if ($USER->instructor) {
                                 changed between the ‘Pre’ and ‘Post’ submissions – shining a light on what they’ve
                                 learned.
                             </p>
-                            <p></p>
-                            <h4>Activity Title</h4>
+                            <h4 class="hardBreakAboveX1">Activity Title</h4>
                             <input type="text" class="form-control" name="PrePostTitle" id="prePostTitleText" rows="1">
                             <h4>What question would you like participants to answer Pre and Post?</h4>
                             <textarea class="form-control" name="PrePostQuestion" id="prePostQuestionText" rows="4"></textarea>
@@ -77,8 +76,8 @@ if ($USER->instructor) {
 } else {
     if (!$main_Id) {
         ?>
-        <div class="text-center">
-            <h3>This page has not been set up yet</h3>
+        <div class="text-center hardBreakAboveX2">
+            <h3>The Instructor has not yet configured this tool.</h3>
         </div>
         <?php
     } else {

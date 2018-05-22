@@ -46,3 +46,11 @@
 .nameLink {
     cursor: pointer;
 }
+
+.hardBreakAboveX1{
+    padding-top: 30px;
+}
+
+.hardBreakAboveX2{
+    padding-top: 60px;
+}
