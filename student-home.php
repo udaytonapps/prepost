@@ -30,11 +30,10 @@ $question = $PP_DAO->getQuestion($main_Id);
 $student_answer = $PP_DAO->getStudentAnswers($question["question_id"],$user_ID);
 
 if(!isset($question["question_id"])){
-    echo('<div class="text-center">
-            <h3>This page has not been set up yet</h3>
+    echo('<div class="text-center hardBreakAboveX2">
+            <h3>The Instructor has not yet configured this tool.</h3>
         </div>');
 }else {
-
     echo('<div class="container-fluid">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2 text-left ">
@@ -48,8 +47,8 @@ if(!isset($question["question_id"])){
                 In some cases a Wrap-up Question will also be included at the end of the activity. </p>
             </div>
         </div>
-        <p></p>
-        </div>');
+        <p>&nbsp;</p>
+    </div>');
 
         $status = 0;//0 = no answers 1 = pre done 2 = pre and post done(No wrap up question) 3 = pre and post done (wrap up question) 4 = all done
         $wrapUpStatus = 0;
