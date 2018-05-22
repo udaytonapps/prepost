@@ -35,7 +35,7 @@ include("menu.php");
 echo('<div class="container-fluid">
     <div class="row">  
         <div class="col-sm-10 col-sm-offset-1 text-left ">
-            <h4>' . $PP_DAO->findDisplayName($answers["user_id"]) . '\'s Question Answers</h4>
+            <h2>' . $PP_DAO->findDisplayName($answers["user_id"]) . '\'s Question Answers</h2>
             <div class="row lines">
                 <input type="hidden" name="pre_question" value="pre_question"/>
                 <h4>Pre Question Answer</h4>
