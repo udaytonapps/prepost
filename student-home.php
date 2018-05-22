@@ -36,8 +36,19 @@ if(!isset($question["question_id"])){
 }else {
 
     echo('<div class="container-fluid">
-        <div class="row"><div class="col-sm-8 col-sm-offset-2 text-left "><h2>' . $question["question_title"] . '</h2></div></div>
-        <div class="row"><div class="col-sm-8 col-sm-offset-2 text-left "><p>PLACEHOLDER TEXT</p></div></div>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-left ">
+                <h2>' . $question["question_title"] . '</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-left ">
+                <p>Please submit your responses to the Pre Question and Post Question using the boxes below. You will 
+                only be able to provide a submission to the Post Question once you have answered the Pre Question. 
+                In some cases a Wrap-up Question will also be included at the end of the activity. </p>
+            </div>
+        </div>
+        <p></p>
         </div>');
 
         $status = 0;//0 = no answers 1 = pre done 2 = pre and post done(No wrap up question) 3 = pre and post done (wrap up question) 4 = all done
@@ -62,7 +73,7 @@ if(!isset($question["question_id"])){
 
         echo('<div class="container-fluid">
 <div class="row">
-    <div class="col-sm-8 col-sm-offset-2 text-left ">
+    <div class="col-sm-4 col-sm-offset-3 text-left ">
         <div class="list-group">');
         if ($status == 0) {
             echo('<a href="pre-question.php" class="list-group-item list-group-item-info">
@@ -74,7 +85,7 @@ if(!isset($question["question_id"])){
                         <div class="col-sm-1 question-text"><span class="fa fa-2x fa-check"></span></div>');
         }
         echo('
-            <div class="col-sm-11 question-text">   
+            <div class="col-sm-8 question-text">   
                 <h4 class="list-group-item-heading">Pre Question</h4>
             </div>
         </div>
@@ -96,7 +107,7 @@ if(!isset($question["question_id"])){
                 </div>');
             }
         }
-        echo('<div class="col-sm-11 question-text">  
+        echo('<div class="col-sm-8 question-text">  
                 <h4 class="list-group-item-heading">Post Question</h4>
                 </div>
             </div>
@@ -120,7 +131,7 @@ if(!isset($question["question_id"])){
                         <div class="col-sm-1 question-text"></div>');
                 }
             }
-            echo('<div class="col-sm-11 question-text">  
+            echo('<div class="col-sm-8 question-text">  
               <h4 class="list-group-item-heading">Wrap Up Question</h4>
               </div>
               </div>
@@ -133,7 +144,8 @@ if(!isset($question["question_id"])){
         echo('<div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text-right ">');
                 if($USER->instructor) {
-                    echo('<a href="instructor-home.php" class="btn btn-primary"  data-toggle="modal">Back</a><span>           </span>');
+                    echo('<a href="instructor-home.php" class="btn btn-primary"  data-toggle="modal">Back</a>
+                        <span>           </span>');
                 }
                 echo('<a href="answer-results.php" class="btn btn-primary"  data-toggle="modal">Your Answers</a>
                 </div>

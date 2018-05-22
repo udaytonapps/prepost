@@ -45,15 +45,21 @@ if ($USER->instructor) {
                     <form method="post" id="addPrePostForm"action="actions/AddQuestion.php">
                         <div class="form-group">
                             <p>
-                                This tool allows faculty to define a question to answer on two different occasions - before and after
-                                they've learned about a topic/subject. The students will answer thquestion before they learn about a
-                                topic/ or subject (Pre). They will then be provided a second box to answer the same question after
-                                learning about the same topic/subject (Post). The students will not be able to see their 'Pre' answer
-                                when they are entering their 'Post' answer. Finallym students will be given a final text area to reflect on
-                                how their answer has changed between their 'Pre' and 'Post' Entries
+                                The goal of this tool is to help students see how their knowledge in a specific area
+                                has increased over time.
                             </p>
-                            <h4>Title</h4>
-                            <input type="text" class="form-control" name="PrePostTitle" id="prePostTitleText" rows="1"></input>
+                            <p>
+                                This tool allows faculty to define a question that students will be asked to answer on
+                                two different occasions - before and after they've learned about a topic or subject.
+                                The students will not be able to see their 'Pre Question' response while completing
+                                their 'Post Question' response. Faculty also have the ability to add a
+                                ‘Wrap-up Question’ that can be used to ask students to reflect on how their answers
+                                changed between the ‘Pre’ and ‘Post’ submissions – shining a light on what they’ve
+                                learned.
+                            </p>
+                            <p></p>
+                            <h4>Activity Title</h4>
+                            <input type="text" class="form-control" name="PrePostTitle" id="prePostTitleText" rows="1">
                             <h4>What question would you like participants to answer Pre and Post?</h4>
                             <textarea class="form-control" name="PrePostQuestion" id="prePostQuestionText" rows="4"></textarea>
                         </div>

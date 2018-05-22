@@ -32,22 +32,33 @@ if (isset($student_answer["pre_modified"])) {
     header('Location: ' . addSession('student-home.php'));
     } else {
     echo('<div class="container-fluid">
-        <div class="row"><h2>' . $question["question_title"] . '</h2></div>
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 text-left ">
+                <h2>' . $question["question_title"] . '</h2>
+            </div>
+        </div>
         <div id="pre_answer_container">
-            <div class="row"><h4>' . $question["pre_question"] . '</h4></div>
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 text-left ">
+                <h4>' . $question["pre_question"] . '</h4>
+            </div>
+            </div>
+        </div>
             <div class="row">
-                <form method="post"  action="actions/AddAnswer.php">
-                    <div class="modal-body">
-                        <input type="hidden" name="pre_answer" value="pre_answer" id="pre_answer"/>
-                        <textarea class="form-control" name="pre_answer_text" rows="4" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
-                    </div>
-                    <div class="modal-footer" id="pre_answer_container_footer">
-                        <a href="student-home.php"> 
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        </a>   
-                        <input type="submit" class="btn btn-success" value="Save">
-                    </div>
-                </form>
+                <div class="col-sm-10 col-sm-offset-1 text-left ">
+                    <form method="post"  action="actions/AddAnswer.php">
+                        <div class="modal-body">
+                            <input type="hidden" name="pre_answer" value="pre_answer" id="pre_answer"/>
+                            <textarea class="form-control" name="pre_answer_text" rows="4" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
+                        </div>
+                        <div class="modal-footer" id="pre_answer_container_footer">
+                            <a href="student-home.php"> 
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </a>   
+                            <input type="submit" class="btn btn-success" value="Save">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>');
