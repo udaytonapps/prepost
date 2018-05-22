@@ -2,7 +2,7 @@
 $menu = array(
     'instructor-home.php' => '<span aria-hidden="true" class="fa fa-lg fa-wrench"></span> Manage',
     'student-results.php' => '<span aria-hidden="true" class="fa fa-lg fa-table"></span> All Results',
-    'student-home.php'  => '<span aria-hidden="true" class="fa fa-lg fa-file-text"></span> Preview Question'
+    'student-home.php'  => '<span aria-hidden="true" class="fa fa-lg fa-retweet"></span> Preview Question'
 );
 ?>
 
