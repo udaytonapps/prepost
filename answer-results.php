@@ -31,24 +31,42 @@ if($question["show_wrap_up_text"]== 1){
     $wrapup = 1;
 }
 
+$preAnswerDate = new DateTime($answers["pre_modified"]);
+
+$formattedPreDate = $preAnswerDate->format("m-d-y")." at ".$preAnswerDate->format("h:i A");
+
+$postAnswerDate = new DateTime($answers["post_modified"]);
+
+$formattedPostDate = $postAnswerDate->format("m-d-y")." at ".$postAnswerDate->format("h:i A");
+
+$wrapupAnswerDate = new DateTime($answers["wrap_up_modified"]);
+
+$formattedWrapupDate = $wrapupAnswerDate->format("m-d-y")." at ".$wrapupAnswerDate->format("h:i A");
+
 include("menu.php");
 echo('<div class="container-fluid">
     <div class="row">  
         <div class="col-sm-10 col-sm-offset-1 text-left ">
-            <h2>' . $PP_DAO->findDisplayName($answers["user_id"]) . '\'s Question Answers</h2>
+            <h2>Responses - ' . $PP_DAO->findDisplayName($answers["user_id"]) . '</h2>
             <div class="row lines">
-                <input type="hidden" name="pre_question" value="pre_question"/>
-                <h4>Pre Question Answer</h4>
-                <p>' . $answers["pre_answer"] . '</p>
+                <div class = "questionDateText">'.$formattedPreDate.'</div>
+                <div>
+                    <h4>Pre Question Answer</h4>
+                    <p>' . $answers["pre_answer"] . '</p>
+                </div>
             </div>
         </div>
     </div>
     <div class="row">  
         <div class="col-sm-10 col-sm-offset-1 text-left ">
-            <div class="row lines">
-                <h4>Post Question Answer</h4>
-                <input type="hidden" name="pre_question" value="pre_question"/>
-                <p>' . $answers["post_answer"] . '</p>
+            <div class="row lines">  
+                <div class = "questionDateText">'.$formattedPostDate.'</div>
+                <div>
+                    <h4>Post Question Answer</h4>
+                    <p>' . $answers["post_answer"] . '</p>
+                </div>
+                
+                
             </div>
         </div>
     </div>');
@@ -56,17 +74,19 @@ if($wrapup == 1) {
     echo('<div class="row">  
         <div class="col-sm-10 col-sm-offset-1 text-left ">
             <div class="row lines">
-                <h4>Wrap Up Question Answer</h4>
-                <input type="hidden" name="pre_question" value="pre_question"/>
-                <p>' . $answers["wrap_up_answer"] . '</p>
+                <div class = "questionDateText">'.$formattedWrapupDate.'</div>
+                <div>
+                    <h4>Wrap Up Question Answer</h4>
+                    <p>' . $answers["wrap_up_answer"] . '</p>
+                </div>
             </div>
         </div>
     </div>
     ');
 }
-    echo('<div class="col-sm-10 col-sm-offset-1 text-right ">
+    echo('<div class="col-sm-10 col-sm-offset-1 text-left ">
             <div class="row lines">
-            <a href="student-home.php" class="btn btn-primary"  data-toggle="modal">Back</a>
+            <a href="student-home.php" class="btn btn-primary"  data-toggle="modal">Done</a>
             </div>
         </div>
     </div>

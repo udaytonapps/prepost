@@ -34,7 +34,7 @@ if(isset($student_answer["wrap_up_answer"])){
     echo('<div class="container-fluid">
         <div class="row">
                 <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <h2>' . $question["question_title"] . '</h2>
+                    <h2>Wrap Up - ' . $question["question_title"] . '</h2>
                 </div>
             </div>
         <div id="pre_answer_container">

@@ -80,7 +80,7 @@ if($USER->instructor){
                                             <h4 class="modal-title">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '\'s Question Answers</h4>
                                         </div>
                                         <div class="modal-body scroll">
-                                            <div class="row lines">
+                                            <div class="row nolines">
                                                 <input type="hidden" name="pre_question" value="pre_question"/>
                                                 <h4>Pre Question Answer</h4>
                                                 <p>' . $answers[$i]["pre_answer"] . '</p>
@@ -99,7 +99,7 @@ if($USER->instructor){
                                             }
                                         echo('</div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-success" data-dismiss="modal">Exit</button>
+                                            <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
                                         </div>
                                     </div>
                                 </div>
