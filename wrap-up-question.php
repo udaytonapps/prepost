@@ -34,7 +34,9 @@ if(isset($student_answer["wrap_up_answer"])){
     echo('<div class="container-fluid">
         <div class="row">
                 <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <h2>Wrap Up - ' . $question["question_title"] . '</h2>
+                    <h2>' . $question["question_title"] . '</h2>
+                    <h3>Wrap Up Question</h3>
+                    
                 </div>
             </div>
         <div id="pre_answer_container">
@@ -46,7 +48,7 @@ if(isset($student_answer["wrap_up_answer"])){
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1 text-left ">
                     <div class="modal-body">
-                        <textarea class="form-control" name="pre_answer_text" rows="4" disabled="disabled" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
+                        <textarea class="form-control" name="pre_answer_text" rows="12" disabled="disabled" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
                     </div>
                 </div>
             </div>
@@ -60,7 +62,7 @@ if(isset($student_answer["wrap_up_answer"])){
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1 text-left ">
                     <div class="modal-body">
-                        <textarea class="form-control" name="post_answer_text" rows="4" disabled="disabled" autofocus required>' . $student_answer["post_answer"] . '</textarea>
+                        <textarea class="form-control" name="post_answer_text" rows="12" disabled="disabled" autofocus required>' . $student_answer["post_answer"] . '</textarea>
                     </div>
                 </div>
             </div>
@@ -76,7 +78,7 @@ if(isset($student_answer["wrap_up_answer"])){
                         <form method="post"  action="actions/AddAnswer.php">
                         <div class="modal-body">
                             <input type="hidden" name="wrap_up_answer" value="wrap_up_answer" id="wrap_up_answer"/>
-                            <textarea class="form-control" name="wrap_up_answer_text" rows="4" autofocus required>' . $student_answer["wrap_up_answer"] . '</textarea>
+                            <textarea class="form-control" name="wrap_up_answer_text" rows="12" autofocus required>' . $student_answer["wrap_up_answer"] . '</textarea>
                         </div>
                         <div class="modal-footer" id="wrap_up_answer_container_footer">
                             <a href="student-home.php">
