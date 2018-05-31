@@ -34,7 +34,8 @@ if (isset($student_answer["post_modified"])) {
     echo('<div class="container-fluid">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 text-left ">
-                <h2>Post - ' . $question["question_title"] . '</h2>
+                <h2>' . $question["question_title"] . '</h2>
+                <h3>Post Question</h3>
             </div>
         </div>
         <div id="post_answer_container">
@@ -48,7 +49,7 @@ if (isset($student_answer["post_modified"])) {
                     <form method="post"  action="actions/AddAnswer.php">
                         <div class="modal-body">
                             <input type="hidden" name="post_answer" value="post_answer" id="post_answer"/>
-                            <textarea class="form-control" name="post_answer_text" rows="4" autofocus required>' . $student_answer["post_answer"] . '</textarea>
+                            <textarea class="form-control" name="post_answer_text" rows="12" autofocus required>' . $student_answer["post_answer"] . '</textarea>
                         </div>
                         <div class="modal-footer" id="post_answer_container_footer">
                             <a href="student-home.php"> 

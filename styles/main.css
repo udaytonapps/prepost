@@ -72,3 +72,12 @@
     float:right;
     padding-top:10px
 }
+
+.successIcon {
+    color: #4F8A10;
+}
+
+.arrowIcon{
+    padding-left: 18px;
+    padding-right: 18px;
+}

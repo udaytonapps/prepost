@@ -68,33 +68,48 @@ if($USER->instructor){
             echo('<li class="list-group-item dark">');
         }
         echo('<div class="row">');
+
             if($wrapup == 1) {
                     echo('<div class="col-sm-3">');
                 }else{
                     echo('<div class="col-sm-4">');
-                }echo('<a  class = "nameLink" data-target="#' . $answers[$i]["user_id"] . '_All"  data-toggle="modal">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '</a></div>
+                }
+                $preAnswerDate = new DateTime($answers[$i]["pre_modified"]);
+                $formattedPreDate = $preAnswerDate->format("m-d-y")." at ".$preAnswerDate->format("h:i A");
+                $postAnswerDate = new DateTime($answers[$i]["post_modified"]);
+                $formattedPostDate = $postAnswerDate->format("m-d-y")." at ".$postAnswerDate->format("h:i A");
+                $wrapupAnswerDate = new DateTime($answers[$i]["wrap_up_modified"]);
+                $formattedWrapupDate = $wrapupAnswerDate->format("m-d-y")." at ".$wrapupAnswerDate->format("h:i A");
+                echo('<a  class = "nameLink" data-target="#' . $answers[$i]["user_id"] . '_All"  data-toggle="modal">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '</a></div>
                             <div class="modal fade" id="' . $answers[$i]["user_id"] . '_All" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title">' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '\'s Question Answers</h4>
+                                            <h4 class="modal-title">Responses - ' . $PP_DAO->findDisplayName($answers[$i]["user_id"]) . '</h4>
                                         </div>
                                         <div class="modal-body scroll">
                                             <div class="row nolines">
                                                 <input type="hidden" name="pre_question" value="pre_question"/>
-                                                <h4>Pre Question Answer</h4>
-                                                <p>' . $answers[$i]["pre_answer"] . '</p>
+                                                <div class = "questionDateText">'.$formattedPreDate.'</div>
+                                                <div>
+                                                    <h4>Pre Question</h4>
+                                                    <p>' . $answers[$i]["pre_answer"] . '</p>
+                                                </div>
                                             </div>
                                             <div class="row lines">
-                                                <h4>Post Question Answer</h4>
-                                                <input type="hidden" name="pre_question" value="pre_question"/>
-                                                <p>' . $answers[$i]["post_answer"] . '</p>
-                                            </div>');
+                                                <div class = "questionDateText">'.$formattedPostDate.'</div>
+                                                <div>
+                                                    <h4>Post Question</h4>
+                                                    <p>' . $answers[$i]["post_answer"] . '</p>
+                                                </div>
+                                                </div>');
                                             if($wrapup == 1) {
                                                 echo('<div class="row lines">
-                                                    <h4>Wrap Up Question Answer</h4>
-                                                    <input type="hidden" name="pre_question" value="pre_question"/>
-                                                    <p>' . $answers[$i]["wrap_up_answer"] . '</p>
+                                                    <div class = "questionDateText">'.$formattedWrapupDate.'</div>
+                                                    <div>
+                                                        <h4>Wrap Up Question</h4>
+                                                        <p>' . $answers[$i]["wrap_up_answer"] . '</p>
+                                                    </div>
                                                 </div>');
                                             }
                                         echo('</div>
