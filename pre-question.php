@@ -35,6 +35,7 @@ if (isset($student_answer["pre_modified"])) {
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 text-left ">
                 <h2>' . $question["question_title"] . '</h2>
+                <h3>Pre Question</h3>
             </div>
         </div>
         <div id="pre_answer_container">
@@ -49,7 +50,7 @@ if (isset($student_answer["pre_modified"])) {
                     <form method="post"  action="actions/AddAnswer.php">
                         <div class="modal-body">
                             <input type="hidden" name="pre_answer" value="pre_answer" id="pre_answer"/>
-                            <textarea class="form-control" name="pre_answer_text" rows="4" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
+                            <textarea class="form-control" name="pre_answer_text" rows="12" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
                         </div>
                         <div class="modal-footer" id="pre_answer_container_footer">
                             <a href="student-home.php"> 

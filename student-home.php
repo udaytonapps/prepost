@@ -36,19 +36,14 @@ if(!isset($question["question_id"])){
 }else {
     echo('<div class="container-fluid">
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-left ">
+            <div class="col-sm-10 col-sm-offset-1 text-left ">
                 <h2>' . $question["question_title"] . '</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-left ">
+
                 <p>Please submit your responses to the Pre Question and Post Question using the boxes below. You will 
                 only be able to provide a submission to the Post Question once you have answered the Pre Question. 
                 In some cases a Wrap-up Question will also be included at the end of the activity. </p>
-            </div>
-        </div>
-        <p>&nbsp;</p>
-    </div>');
+            </div>    
+');
 
         $status = 0;//0 = no answers 1 = pre done 2 = pre and post done(No wrap up question) 3 = pre and post done (wrap up question) 4 = all done
         $wrapUpStatus = 0;
@@ -70,44 +65,43 @@ if(!isset($question["question_id"])){
             $status = 2;
         }
 
-        echo('<div class="container-fluid">
-<div class="row">
-    <div class="col-sm-4 col-sm-offset-3 text-left ">
+        echo('
+    <div class="col-sm-6 col-sm-offset-3 text-left ">
         <div class="list-group">');
         if ($status == 0) {
             echo('<a href="pre-question.php" class="list-group-item list-group-item-info">
                 <div class="row">
-                    <div class="col-sm-1 question-text"><span class="fa fa-2x fa-arrow-right"></span></div>');
+                    <div class="col-sm-1 text-center  question-text arrowIcon"><span class="fa fa-2x fa-arrow-right"></span></div>');
         } else {
             echo('<a href="pre-question.php" class="list-group-item disabled done">
                     <div class="row">
-                        <div class="col-sm-1 question-text"><span class="fa fa-2x fa-check"></span></div>');
+                        <div class="col-sm-1 text-center  question-text "><span class="successIcon fa fa-2x fa-check"></span></div>');
         }
         echo('
-            <div class="col-sm-8 question-text">   
-                <h4 class="list-group-item-heading">Pre Question</h4>
+            <div class="col-sm-8 question-text ">   
+                <h3 class="list-group-item-heading questionTitle">Pre Question</h3>
             </div>
         </div>
         </a>');
         if ($status == 1) {
             echo('<a href="post-question.php" class="list-group-item list-group-item-info">
                 <div class="row">
-                    <div class="col-sm-1 question-text"><span class="fa fa-2x fa-arrow-right"></span></div>');
+                    <div class="col-sm-1 text-center  question-text arrowIcon" ><span class="fa fa-2x fa-arrow-right"></span></div>');
         } else {
 
             if ($status > 1) {
                 echo('<a href="post-question.php" class="list-group-item disabled done">
                     <div class="row">
-                        <div class="col-sm-1 question-text"><span class="fa fa-2x fa-check"></span>
+                        <div class="col-sm-1 text-center  question-text"><span class="successIcon fa fa-2x fa-check"></span>
                     </div>');
             } else {
                 echo('<a href="post-question.php" class="list-group-item disabled">
-                    <div class="row"><div class="col-sm-1 question-text">
+                    <div class="row"><div class="col-sm-1 text-center  question-text">
                 </div>');
             }
         }
         echo('<div class="col-sm-8 question-text">  
-                <h4 class="list-group-item-heading">Post Question</h4>
+                <h3 class="list-group-item-heading questionTitle">Post Question</h3>
                 </div>
             </div>
             </a>');
@@ -115,42 +109,42 @@ if(!isset($question["question_id"])){
             if ($status == 3) {
                 echo('<a href="wrap-up-question.php" class="list-group-item list-group-item-info">
                 <div class="row">
-                    <div class="col-sm-1 question-text"><span class="fa fa-2x fa-arrow-right"></span></div>');
+                    <div class="col-sm-1 text-center  question-text arrowIcon"><span class="fa fa-2x fa-arrow-right"></span></div>');
             } else {
 
                 if ($status > 3) {
                     echo('<a href="wrap-up-question.php" class="list-group-item disabled done">
                     <div class="row">
-                        <div class="col-sm-1 question-text">
-                            <span class="fa fa-2x fa-check"></span>
+                        <div class="col-sm-1 text-center  question-text">
+                            <span class="successIcon fa fa-2x fa-check"></span>
                         </div>');
                 } else {
                     echo('<a href="wrap-up-question.php" class="list-group-item disabled">
                         <div class="row">
-                        <div class="col-sm-1 question-text"></div>');
+                        <div class="col-sm-1 text-center  question-text"></div>');
                 }
             }
             echo('<div class="col-sm-8 question-text">  
-              <h4 class="list-group-item-heading">Wrap Up Question</h4>
+              <h3 class="list-group-item-heading questionTitle">Wrap Up Question</h3>
               </div>
               </div>
             </a>
             ');
         }
         echo('</div>
-            </div>');
+        </div>
+        <div class="col-sm-10 col-sm-offset-1 text-left ">
+            ');
     if(($status==2) || ($status==4)){
-        echo('<div class="row">
-                <div class="col-sm-8 col-sm-offset-2 text-right ">');
                 if($USER->instructor) {
                     echo('<a href="instructor-home.php" class="btn btn-primary"  data-toggle="modal">Back</a>
                         <span>           </span>');
                 }
                 echo('<a href="answer-results.php" class="btn btn-primary"  data-toggle="modal">Your Answers</a>
                 </div>
-            </div>');
+            ');
     }
-    echo('</div>
+    echo('</div></div>
 </div>');
 }
 ////////////////////////////-/////////////////////////////

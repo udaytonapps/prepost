@@ -1,4 +1,9 @@
 /* Main CSS file */
+
+.list-group{
+    margin-top: 21px;
+}
+
 .list-group-item.disabled,
 .list-group-item.disabled:hover,
 .list-group-item.disabled:focus {
@@ -29,6 +34,10 @@
     border-top: 1px solid #ddd;
 }
 
+.row .nolines {
+    margin: 1em 0;
+}
+
 .scroll{
     overflow-x: auto;
     overflow-y: auto;
@@ -53,4 +62,22 @@
 
 .hardBreakAboveX2{
     padding-top: 60px;
+}
+
+.questionTitle{
+    font-size: 200%;
+}
+
+.questionDateText{
+    float:right;
+    padding-top:10px
+}
+
+.successIcon {
+    color: #4F8A10;
+}
+
+.arrowIcon{
+    padding-left: 18px;
+    padding-right: 18px;
 }
