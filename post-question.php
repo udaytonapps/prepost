@@ -34,20 +34,16 @@ if (isset($student_answer["post_modified"])) {
     echo('<div class="container-fluid">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 text-left ">
-                <h2>' . $question["question_title"] . '</h2>
-                <h3>Post Question</h3>
+                <h2 class="noBottomPadding">' . $question["question_title"] . '</h2>
+                <h3 class="noTopPadding">Post Question</h3>
             </div>
         </div>
         <div id="post_answer_container">
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <h4>' . $question["post_question"] . '</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1 text-left ">
+                    <h4 class="questionPadding">' . $question["post_question"] . '</h4>
                     <form method="post"  action="actions/AddAnswer.php">
-                        <div class="modal-body">
+                        <div class="modal-body noTopPadding">
                             <input type="hidden" name="post_answer" value="post_answer" id="post_answer"/>
                             <textarea class="form-control" name="post_answer_text" rows="12" autofocus required>' . $student_answer["post_answer"] . '</textarea>
                         </div>
