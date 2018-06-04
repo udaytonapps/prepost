@@ -34,21 +34,18 @@ if (isset($student_answer["pre_modified"])) {
     echo('<div class="container-fluid">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 text-left ">
-                <h2>' . $question["question_title"] . '</h2>
-                <h3>Pre Question</h3>
+                <h2 class="noBottomPadding">' . $question["question_title"] . '</h2>
+                <h3 class="noTopPadding">Pre Question</h3>
             </div>
         </div>
         <div id="pre_answer_container">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 text-left ">
-                <h4>' . $question["pre_question"] . '</h4>
+                <h4 class="questionPadding">' . $question["pre_question"] . '</h4>
             </div>
-            </div>
-        </div>
-            <div class="row">
                 <div class="col-sm-10 col-sm-offset-1 text-left ">
                     <form method="post"  action="actions/AddAnswer.php">
-                        <div class="modal-body">
+                        <div class="modal-body noTopPadding">
                             <input type="hidden" name="pre_answer" value="pre_answer" id="pre_answer"/>
                             <textarea class="form-control" name="pre_answer_text" rows="12" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
                         </div>

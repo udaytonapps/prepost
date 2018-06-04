@@ -81,3 +81,18 @@
     padding-left: 18px;
     padding-right: 18px;
 }
+
+.noTopPadding{
+    padding-top: 0px;
+    margin-top: 0px;
+}
+.noBottomPadding{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.questionPadding{
+    padding-left: 20px;
+    margin-bottom: 1px;
+    padding-bottom: 1px;
+}
