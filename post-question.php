@@ -33,33 +33,27 @@ if (isset($student_answer["post_modified"])) {
 }else {
     echo('<div class="container-fluid">
         <div class="row">
-            <div class="col-sm-10 col-sm-offset-1 text-left ">
-                <h2 class="noBottomPadding">' . $question["question_title"] . '</h2>
-                <h3 class="noTopPadding">Post Question</h3>
-            </div>
-        </div>
-        <div id="post_answer_container">
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <h4 class="questionPadding">' . $question["post_question"] . '</h4>
-                    <form method="post"  action="actions/AddAnswer.php">
-                        <div class="modal-body noTopPadding">
-                            <input type="hidden" name="post_answer" value="post_answer" id="post_answer"/>
-                            <textarea class="form-control" name="post_answer_text" rows="12" autofocus required>' . $student_answer["post_answer"] . '</textarea>
-                        </div>
-                        <div class="modal-footer" id="post_answer_container_footer">
-                            <a href="student-home.php"> 
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <div class="col-sm-8 col-sm-offset-2 text-left ">
+                <h2>' . $question["question_title"] . '
+                <br />
+                <small>Post Question</small>
+                </h2>
+                    <form method="post" class="question-form" action="actions/AddAnswer.php">
+                        <h4>' . $question["post_question"] . '</h4>
+                        <input type="hidden" name="post_answer" value="post_answer" id="post_answer"/>
+                        <textarea class="form-control" name="post_answer_text" rows="12" autofocus required>' . $student_answer["post_answer"] . '</textarea>
+                        <div class="text-right answer-buttons" id="post_answer_container_footer">
+                            <a href="student-home.php" class="btn btn-danger"> 
+                                Cancel
                             </a>
                             <input type="submit" class="btn btn-success" value="Save">
                         </div>
                     </form>
-                </div>
             </div>
         </div>
     </div>');
 }
-////////////////////////////-/////////////////////////////
+
 $OUTPUT->footerStart();
 ?>
     <!-- Our main javascript file for tool functions -->

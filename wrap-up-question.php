@@ -33,65 +33,34 @@ if(isset($student_answer["wrap_up_answer"])){
 } else {
     echo('<div class="container-fluid">
         <div class="row">
-                <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <h2 class="noBottomPadding">' . $question["question_title"] . '</h2>
-                    <h3 class="noTopPadding">Wrap Up Question</h3>
-                </div>
-            </div>
-        <div id="pre_answer_container">
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <h4 class="questionPadding">' . $question["pre_question"] . '</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <div class="modal-body noTopPadding">
-                        <textarea class="form-control" name="pre_answer_text" rows="12" disabled="disabled" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="post_answer_container">
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <h4 class="questionPadding">' . $question["post_question"] . '</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <div class="modal-body noTopPadding">
-                        <textarea class="form-control" name="post_answer_text" rows="12" disabled="disabled" autofocus required>' . $student_answer["post_answer"] . '</textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <div id="wrap_up_answer_container">
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1 text-left ">
-                        <h4 class="questionPadding">' . $question["wrap_up_text"] . '</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1 text-left ">
-                        <form method="post"  action="actions/AddAnswer.php">
-                        <div class="modal-body noTopPadding">
-                            <input type="hidden" name="wrap_up_answer" value="wrap_up_answer" id="wrap_up_answer"/>
-                            <textarea class="form-control" name="wrap_up_answer_text" rows="12" autofocus required>' . $student_answer["wrap_up_answer"] . '</textarea>
-                        </div>
-                        <div class="modal-footer" id="wrap_up_answer_container_footer">
-                            <a href="student-home.php">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <div class="col-sm-8 col-sm-offset-2 text-left ">
+                    <h2>' . $question["question_title"] . '
+                    <br />
+                    <small>Wrap Up Question</small>
+                    </h2>
+                    <hr>
+                    <h4>' . $question["pre_question"] . '</h4>
+                        <p class="question-response">' . $student_answer["pre_answer"] . '</p>
+                    <hr>
+                    <h4>' . $question["post_question"] . '</h4>
+                        <p class="question-response">' . $student_answer["post_answer"] . '</p>
+                    <hr>
+                    <form method="post" class="question-form" action="actions/AddAnswer.php">
+                        <h4>' . $question["wrap_up_text"] . '</h4>
+                        <input type="hidden" name="wrap_up_answer" value="wrap_up_answer" id="wrap_up_answer"/>
+                        <textarea class="form-control" name="wrap_up_answer_text" rows="12" autofocus required>' . $student_answer["wrap_up_answer"] . '</textarea>
+                        <div class="text-right answer-buttons" id="wrap_up_answer_container_footer">
+                            <a href="student-home.php" class="btn btn-danger">
+                                Cancel
                             </a>
                             <input type="submit" class="btn btn-success" value="Save">
                         </div>
                     </form>
                 </div>
-            </div>
         </div>
     </div>');
 }
-////////////////////////////-/////////////////////////////
+
 $OUTPUT->footerStart();
 ?>
     <!-- Our main javascript file for tool functions -->

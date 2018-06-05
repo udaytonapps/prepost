@@ -64,7 +64,7 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Edit Question Title</h4>
                         </div>
                         <form method="post"  action="actions/EditQuestion.php">
-                                <div class="modal-body scroll">
+                                <div class="modal-body">
                                     <input type="hidden" name="question_title" value="question_title"/>
                                     <textarea class="form-control" name="titleText" rows="4" autofocus required>' . $question["question_title"] . '</textarea>
                                 </div>
@@ -103,7 +103,7 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Edit Pre Question Text</h4>
                         </div>
                         <form method="post"  action="actions/EditQuestion.php">
-                                <div class="modal-body scroll">
+                                <div class="modal-body">
                                     <input type="hidden" name="pre_question" value="pre_question"/>
                                     <textarea class="form-control" name="preQuestion" rows="4" autofocus required>' . $question["pre_question"] . '</textarea>
                                 </div>
@@ -175,7 +175,7 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Edit Post Question Text</h4>
                         </div>
                         <form method="post"  action="actions/EditQuestion.php">
-                                <div class="modal-body scroll">
+                                <div class="modal-body">
                                     <input type="hidden" name="post_question" value="post_question"/>
                                     <textarea class="form-control" name="postQuestion" rows="4" autofocus required>' . $question["post_question"] . '</textarea>
                                 </div>
@@ -269,7 +269,7 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Edit Wrap Up Question Text</h4>
                         </div>
                         <form method="post"  action="actions/EditQuestion.php">
-                                <div class="modal-body scroll">
+                                <div class="modal-body">
                                     <input type="hidden" name="wrap_up_text" value="wrap_up_text"/>
                                     <textarea class="form-control" name="wrapUpQuestion" rows="4" autofocus required>' . $question["wrap_up_text"] . '</textarea>
                                 <div class="modal-footer">
@@ -325,7 +325,6 @@ if ($USER->instructor) {
     header('Location: ' . addSession('student-home.php'));
 }
 
-////////////////////////////-/////////////////////////////
 $OUTPUT->footerStart();
 ?>
     <!-- Our main javascript file for tool functions -->

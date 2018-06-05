@@ -36,7 +36,7 @@ if(!isset($question["question_id"])){
 }else {
     echo('<div class="container-fluid">
         <div class="row">
-            <div class="col-sm-10 col-sm-offset-1 text-left ">
+            <div class="col-sm-8 col-sm-offset-2 text-left ">
                 <h2>' . $question["question_title"] . '</h2>
 
                 <p>Please submit your responses to the Pre Question and Post Question using the boxes below. You will 
@@ -66,88 +66,67 @@ if(!isset($question["question_id"])){
         }
 
         echo('
-    <div class="col-sm-6 col-sm-offset-3 text-left ">
-        <div class="list-group">');
+    <div class="col-sm-5 col-sm-offset-2 text-left">
+        <div class="list-group question-list-group">');
         if ($status == 0) {
             echo('<a href="pre-question.php" class="list-group-item list-group-item-info">
-                <div class="row">
-                    <div class="col-sm-1 text-center  question-text arrowIcon"><span class="fa fa-2x fa-arrow-right"></span></div>');
+                    <span class="fa fa-fw fa-arrow-right"></span>');
         } else {
             echo('<a href="pre-question.php" class="list-group-item disabled done">
-                    <div class="row">
-                        <div class="col-sm-1 text-center  question-text "><span class="successIcon fa fa-2x fa-check"></span></div>');
+                    <span class="successIcon fa fa-fw fa-check"></span>');
         }
-        echo('
-            <div class="col-sm-8 question-text ">   
-                <h3 class="list-group-item-heading questionTitle">Pre Question</h3>
-            </div>
-        </div>
+        echo('Pre Question
         </a>');
         if ($status == 1) {
             echo('<a href="post-question.php" class="list-group-item list-group-item-info">
-                <div class="row">
-                    <div class="col-sm-1 text-center  question-text arrowIcon" ><span class="fa fa-2x fa-arrow-right"></span></div>');
+                  <span class="fa fa-fw fa-arrow-right"></span>');
         } else {
 
             if ($status > 1) {
                 echo('<a href="post-question.php" class="list-group-item disabled done">
-                    <div class="row">
-                        <div class="col-sm-1 text-center  question-text"><span class="successIcon fa fa-2x fa-check"></span>
-                    </div>');
+                      <span class="successIcon fa fa-fw fa-check"></span>');
             } else {
                 echo('<a href="post-question.php" class="list-group-item disabled">
-                    <div class="row"><div class="col-sm-1 text-center  question-text">
-                </div>');
+                      <span class="fa fa-fw fa-arrow-right invisible"></span>');
             }
         }
-        echo('<div class="col-sm-8 question-text">  
-                <h3 class="list-group-item-heading questionTitle">Post Question</h3>
-                </div>
-            </div>
+        echo('Post Question
             </a>');
         if ($wrapUpStatus == 1) {
             if ($status == 3) {
                 echo('<a href="wrap-up-question.php" class="list-group-item list-group-item-info">
-                <div class="row">
-                    <div class="col-sm-1 text-center  question-text arrowIcon"><span class="fa fa-2x fa-arrow-right"></span></div>');
+                    <span class="fa fa-fw fa-arrow-right"></span>');
             } else {
 
                 if ($status > 3) {
                     echo('<a href="wrap-up-question.php" class="list-group-item disabled done">
-                    <div class="row">
-                        <div class="col-sm-1 text-center  question-text">
-                            <span class="successIcon fa fa-2x fa-check"></span>
-                        </div>');
+                            <span class="successIcon fa fa-fw fa-check"></span>');
                 } else {
                     echo('<a href="wrap-up-question.php" class="list-group-item disabled">
-                        <div class="row">
-                        <div class="col-sm-1 text-center  question-text"></div>');
+                        <span class="fa fa-fw fa-arrow-right invisible"></span>');
                 }
             }
-            echo('<div class="col-sm-8 question-text">  
-              <h3 class="list-group-item-heading questionTitle">Wrap Up Question</h3>
-              </div>
-              </div>
+            echo('Wrap Up Question
             </a>
             ');
         }
         echo('</div>
         </div>
-        <div class="col-sm-10 col-sm-offset-1 text-left ">
+        <div class="col-sm-8 col-sm-offset-2 text-left ">
             ');
     if(($status==2) || ($status==4)){
                 if($USER->instructor) {
                     echo('<a href="instructor-home.php" class="btn btn-primary"  data-toggle="modal">Back</a>
                         <span>           </span>');
                 }
-                echo('<a href="answer-results.php" class="btn btn-primary"  data-toggle="modal">Your Answers</a>
+                echo('<a href="answer-results.php" class="btn btn-success"  data-toggle="modal">Your Answers</a>
                 </div>
             ');
     }
     echo('</div></div>
 </div>');
 }
-////////////////////////////-/////////////////////////////
+
 $OUTPUT->footerStart();
 ?>
     <!-- Our main javascript file for tool functions -->

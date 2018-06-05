@@ -40,8 +40,6 @@ if ($USER->instructor) {
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                     <h3>Create Pre/Post Reflection</h3>
-                </div>
-                <div class="col-sm-8 col-sm-offset-2">
                     <form method="post" id="addPrePostForm"action="actions/AddQuestion.php">
                         <div class="form-group">
                             <p>

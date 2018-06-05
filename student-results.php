@@ -41,14 +41,14 @@ if($USER->instructor){
     
     
     <div id="post_answer_container">
-            <ul class="list-group">');
+            <div class="list-group">');
     $i = 0;
     $wrapup = 0;
     if($question["show_wrap_up_text"]== 1){
         $wrapup = 1;
     }
 
-    echo('<li class="list-group-item dark"><div class="row">');
+    echo('<div class="list-group-item dark"><div class="row no-margin">');
     if($wrapup == 1) {
         echo('<div class="col-sm-3 text-left">Student</div>
               <div class="col-sm-3 text-center">Pre Answer</div>
@@ -60,14 +60,14 @@ if($USER->instructor){
               <div class="col-sm-4 text-center">Post Answer</div>');
     }
 
-    echo('</div></li>');
+    echo('</div></div>');
     foreach($answers as $inner_array){
         if ( ($i & 1) == 0 ) {
-            echo('<li class="list-group-item">');
+            echo('<div class="list-group-item">');
         }else{
-            echo('<li class="list-group-item dark">');
+            echo('<div class="list-group-item dark">');
         }
-        echo('<div class="row">');
+        echo('<div class="row no-margin">');
 
             if($wrapup == 1) {
                     echo('<div class="col-sm-3">');
@@ -142,14 +142,14 @@ if($USER->instructor){
                 </div>');
             }
         }
-        echo('</div></li>');
+        echo('</div></div>');
         $i++;
     }
-    echo('</ul></div></div></div>');
+    echo('</div></div></div></div>');
 }else{
     header('Location: ' . addSession('student-home.php'));
 }
-////////////////////////////-/////////////////////////////
+
 $OUTPUT->footerStart();
 ?>
     <!-- Our main javascript file for tool functions -->
