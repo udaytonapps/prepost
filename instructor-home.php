@@ -26,8 +26,22 @@ $OUTPUT->bodyStart();
 
 include("menu.php");
 
+$preAnswers = 0;
+$postAnswers = 0;
+$wrapUpAnswers = 0;
 $question = $PP_DAO->getQuestion($main_Id);
 $answers = $PP_DAO->getAllStudentAnswers($question["question_id"]);
+foreach ($answers as $answer){
+    if(isset($answer["pre_answer"])){
+        $preAnswers++;
+    }
+    if(isset($answer["post_answer"])){
+        $postAnswers++;
+    }
+    if(isset($answer["wrap_up_answer"])){
+        $wrapUpAnswers++;
+    }
+}
 $numAnswers =sizeof($answers);
 
 if ($USER->instructor) {
@@ -50,7 +64,7 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Edit Question Title</h4>
                         </div>
                         <form method="post"  action="actions/EditQuestion.php">
-                                <div class="modal-body scroll">
+                                <div class="modal-body">
                                     <input type="hidden" name="question_title" value="question_title"/>
                                     <textarea class="form-control" name="titleText" rows="4" autofocus required>' . $question["question_title"] . '</textarea>
                                 </div>
@@ -76,7 +90,7 @@ if ($USER->instructor) {
             <textarea class="form-control" name="Question" rows="4" disabled="disabled">' . $question["pre_question"] . '</textarea>
             </div>
             <div class="col-sm-3 text-right question-actions">
-                <a href="#Pre_Question_Report" class="btn btn-primary"  data-toggle="modal">Results (' .$numAnswers. ')</a>
+                <a href="#Pre_Question_Report" class="btn btn-primary"  data-toggle="modal">Results (' .$preAnswers. ')</a>
                 <a href="#Edit_Pre_Question" class="btn btn-warning" data-toggle="modal">
                     <span class="fa fa-pencil" aria-hidden="true" title="Edit Pre Question"></span><span class="sr-only">Edit Pre Question</span>
                 </a>
@@ -89,7 +103,7 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Edit Pre Question Text</h4>
                         </div>
                         <form method="post"  action="actions/EditQuestion.php">
-                                <div class="modal-body scroll">
+                                <div class="modal-body">
                                     <input type="hidden" name="pre_question" value="pre_question"/>
                                     <textarea class="form-control" name="preQuestion" rows="4" autofocus required>' . $question["pre_question"] . '</textarea>
                                 </div>
@@ -111,25 +125,21 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Pre-Question Report</h4>
                         </div>
                         <div class="modal-body scroll student-answers">');
-                            $i = 0;
-                            if ($numAnswers === 0) {
+                            if ($preAnswers === 0) {
                                 echo('<h4 class=\'text-center\'><em>No students have answered this question yet.</em></h4>');
                             } else {
                                 foreach ( $answers as $inner_array ) {
-                                    $UserID = $answers[$i]["user_id"];
-
+                                    $UserID = $inner_array["user_id"];
                                     $displayName = $PP_DAO->findDisplayName($UserID);
-
-                                    $answerText = $answers[$i]["pre_answer"];
-                                    $answerDate = new DateTime($answers[$i]["pre_modified"]);
-
+                                    $answerText = $inner_array["pre_answer"];
+                                    $answerDate = new DateTime($inner_array["pre_modified"]);
                                     $formattedDate = $answerDate->format("m-d-y")." at ".$answerDate->format("h:i A");
-
-                                    echo('<div class="row lines">
-                                        <div class="col-sm-3"><strong>'.$displayName.'</strong><br /><small>'.$formattedDate.'</small></div>
-                                        <div class="col-sm-9">'.$answerText.'</div>
-                                      </div>');
-                                    $i++;
+                                    if(isset($inner_array["pre_answer"])) {
+                                        echo('<div class="row lines">
+                                            <div class="col-sm-3"><strong>' . $displayName . '</strong><br /><small>' . $formattedDate . '</small></div>
+                                            <div class="col-sm-9">' . $answerText . '</div>
+                                        </div>');
+                                    }
                                 }
                             }
                         echo('</div>
@@ -152,7 +162,7 @@ if ($USER->instructor) {
             <textarea class="form-control" name="Question" rows="4" disabled="disabled">' . $question["post_question"] . '</textarea>
             </div>
             <div class="col-sm-3 text-right question-actions">
-                <a href="#Post_Question_Report" class="btn btn-primary"  data-toggle="modal">Results (' .$numAnswers. ')</a>
+                <a href="#Post_Question_Report" class="btn btn-primary"  data-toggle="modal">Results (' .$postAnswers. ')</a>
                 <a href="#Edit_Post_Question" class="btn btn-warning" data-toggle="modal">
                     <span class="fa fa-pencil" aria-hidden="true" title="Edit Post Question"></span><span class="sr-only">Edit Post Question</span>
                 </a>
@@ -165,7 +175,7 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Edit Post Question Text</h4>
                         </div>
                         <form method="post"  action="actions/EditQuestion.php">
-                                <div class="modal-body scroll">
+                                <div class="modal-body">
                                     <input type="hidden" name="post_question" value="post_question"/>
                                     <textarea class="form-control" name="postQuestion" rows="4" autofocus required>' . $question["post_question"] . '</textarea>
                                 </div>
@@ -187,25 +197,21 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Post-Question Report</h4>
                         </div>
                         <div class="modal-body scroll student-answers">');
-                            $i = 0;
-                            if ($numAnswers === 0) {
+                            if ($postAnswers === 0) {
                                 echo('<h4 class=\'text - center\'><em>No students have answered this question yet.</em></h4>');
                             } else {
                                 foreach ( $answers as $inner_array ) {
-                                    $UserID = $answers[$i]["user_id"];
-
+                                    $UserID = $inner_array["user_id"];
                                     $displayName = $PP_DAO->findDisplayName($UserID);
-
-                                    $answerText = $answers[$i]["post_answer"];
-                                    $answerDate = new DateTime($answers[$i]["post_modified"]);
-
+                                    $answerText = $inner_array["post_answer"];
+                                    $answerDate = new DateTime($inner_array["post_modified"]);
                                     $formattedDate = $answerDate->format("m-d-y")." at ".$answerDate->format("h:i A");
-
-                                    echo('<div class="row lines">
-                                        <div class="col-sm-3"><strong>'.$displayName.'</strong><br /><small>'.$formattedDate.'</small></div>
-                                        <div class="col-sm-9">'.$answerText.'</div>
-                                      </div>');
-                                    $i++;
+                                    if(isset($inner_array["post_answer"])) {
+                                        echo('<div class="row lines">
+                                            <div class="col-sm-3"><strong>' . $displayName . '</strong><br /><small>' . $formattedDate . '</small></div>
+                                            <div class="col-sm-9">' . $answerText . '</div>
+                                        </div>');
+                                    }
                                 }
                             }
                         echo('</div>
@@ -250,7 +256,7 @@ if ($USER->instructor) {
             <textarea class="form-control" name="PrePostWrapUpText" id="prePostWrapUpText" rows="4" disabled="disabled">' . $question["wrap_up_text"] . '</textarea>
             </div>
             <div class="col-sm-3 text-right question-actions">
-                <a href="#Wrap_Up_Question_Report" class="btn btn-primary"  data-toggle="modal">Results (' .$numAnswers. ')</a>
+                <a href="#Wrap_Up_Question_Report" class="btn btn-primary"  data-toggle="modal">Results (' .$wrapUpAnswers. ')</a>
                 <a href="#Edit_Wrap_Up_Text" class="btn btn-warning" data-toggle="modal">
                     <span class="fa fa-pencil" aria-hidden="true" title="Edit Wrap Up Text"></span><span class="sr-only">Edit Wrap Up Question</span>
                 </a>
@@ -263,7 +269,7 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Edit Wrap Up Question Text</h4>
                         </div>
                         <form method="post"  action="actions/EditQuestion.php">
-                                <div class="modal-body scroll">
+                                <div class="modal-body">
                                     <input type="hidden" name="wrap_up_text" value="wrap_up_text"/>
                                     <textarea class="form-control" name="wrapUpQuestion" rows="4" autofocus required>' . $question["wrap_up_text"] . '</textarea>
                                 <div class="modal-footer">
@@ -285,25 +291,21 @@ if ($USER->instructor) {
                             <h4 class="modal-title">Wrap-Up-Question Report</h4>
                         </div>
                         <div class="modal-body scroll student-answers">');
-                            $i = 0;
-                            if ($numAnswers === 0) {
+                            if ($wrapUpAnswers === 0) {
                                 echo('<h4 class=\'text - center\'><em>No students have answered this question yet.</em></h4>');
                             } else {
                                 foreach ( $answers as $inner_array ) {
-                                    $UserID = $answers[$i]["user_id"];
-
+                                    $UserID = $inner_array["user_id"];
                                     $displayName = $PP_DAO->findDisplayName($UserID);
-
-                                    $answerText = $answers[$i]["wrap_up_answer"];
-                                    $answerDate = new DateTime($answers[$i]["wrap_up_modified"]);
-
+                                    $answerText = $inner_array["wrap_up_answer"];
+                                    $answerDate = new DateTime($inner_array["wrap_up_modified"]);
                                     $formattedDate = $answerDate->format("m-d-y")." at ".$answerDate->format("h:i A");
-
-                                    echo('<div class="row lines">
-                                        <div class="col-sm-3"><strong>'.$displayName.'</strong><br /><small>'.$formattedDate.'</small></div>
-                                        <div class="col-sm-9">'.$answerText.'</div>
-                                      </div>');
-                                    $i++;
+                                    if(isset($inner_array["wrap_up_answer"])) {
+                                        echo('<div class="row lines">
+                                            <div class="col-sm-3"><strong>' . $displayName . '</strong><br /><small>' . $formattedDate . '</small></div>
+                                            <div class="col-sm-9">' . $answerText . '</div>
+                                        </div>');
+                                    }
                                 }
                             }
                         echo('</div>
@@ -323,7 +325,6 @@ if ($USER->instructor) {
     header('Location: ' . addSession('student-home.php'));
 }
 
-////////////////////////////-/////////////////////////////
 $OUTPUT->footerStart();
 ?>
     <!-- Our main javascript file for tool functions -->

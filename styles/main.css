@@ -27,6 +27,7 @@
 
 .list-group-item.dark{
     background-color: #eee;
+    font-weight: bold;
 }
 
 .row .lines {
@@ -64,8 +65,20 @@
     padding-top: 60px;
 }
 
-.questionTitle{
-    font-size: 200%;
+.question-list-group a {
+    font-size: 2em;
+}
+
+.question-list-group a > span.fa {
+    margin: 0 18px;
+}
+
+.list-group-item {
+    padding-left: 0;
+}
+
+.questionTitle {
+    margin-top: 0;
 }
 
 .questionDateText{
@@ -80,4 +93,22 @@
 .arrowIcon{
     padding-left: 18px;
     padding-right: 18px;
+}
+
+.answer-buttons {
+    margin-top: 1em;
+}
+
+form.question-form {
+    margin-top: 1em;
+}
+
+p.question-response {
+    padding: 0.5em;
+    background: #efefef;
+    border: 1px solid #ccc;
+}
+
+.row.no-margin {
+    margin: 0;
 }

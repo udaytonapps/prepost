@@ -33,38 +33,27 @@ if (isset($student_answer["pre_modified"])) {
     } else {
     echo('<div class="container-fluid">
         <div class="row">
-            <div class="col-sm-10 col-sm-offset-1 text-left ">
-                <h2>' . $question["question_title"] . '</h2>
-                <h3>Pre Question</h3>
-            </div>
-        </div>
-        <div id="pre_answer_container">
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1 text-left ">
-                <h4>' . $question["pre_question"] . '</h4>
-            </div>
-            </div>
-        </div>
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1 text-left ">
-                    <form method="post"  action="actions/AddAnswer.php">
-                        <div class="modal-body">
-                            <input type="hidden" name="pre_answer" value="pre_answer" id="pre_answer"/>
-                            <textarea class="form-control" name="pre_answer_text" rows="12" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
-                        </div>
-                        <div class="modal-footer" id="pre_answer_container_footer">
-                            <a href="student-home.php"> 
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            </a>   
+            <div class="col-sm-8 col-sm-offset-2 text-left ">
+                <h2>' . $question["question_title"] . '
+                <br />
+                <small>Pre Question</small>
+                </h2>
+                    <form method="post" class="question-form" action="actions/AddAnswer.php">
+                    <h4>' . $question["pre_question"] . '</h4>
+                        <input type="hidden" name="pre_answer" value="pre_answer" id="pre_answer"/>
+                        <textarea class="form-control" name="pre_answer_text" rows="12" autofocus required>' . $student_answer["pre_answer"] . '</textarea>
+                        <div class="text-right answer-buttons" id="pre_answer_container_footer">
+                            <a href="student-home.php" class="btn btn-danger"> 
+                                Cancel
+                            </a>
                             <input type="submit" class="btn btn-success" value="Save">
                         </div>
                     </form>
-                </div>
             </div>
         </div>
     </div>');
 }
-////////////////////////////-/////////////////////////////
+
 $OUTPUT->footerStart();
 ?>
     <!-- Our main javascript file for tool functions -->
