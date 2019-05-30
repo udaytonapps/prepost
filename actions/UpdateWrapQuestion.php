@@ -15,7 +15,7 @@ if ($USER->instructor) {
 
     $result = array();
 
-    if (isset($_POST["questionText"]) && trim($_POST["questionText"] !== '')) {
+    if (isset($_POST["questionText"]) && trim($_POST["questionText"]) !== '') {
         $currentTime = new DateTime('now', new DateTimeZone($CFG->timezone));
         $currentTime = $currentTime->format("Y-m-d H:i:s");
 

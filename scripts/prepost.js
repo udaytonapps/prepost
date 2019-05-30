@@ -1,6 +1,18 @@
 var PrePostJS = (function () {
     var prePostJS = {};
 
+    prePostJS.initResultsPage = function () {
+        $('.results-collapse.collapse').on('show.bs.collapse', function(){
+            var rowDiv = $(this).parent();
+            rowDiv.find(".fa.rotate").addClass("open");
+            rowDiv.parent().addClass("selected-row");
+        }).on('hide.bs.collapse', function(){
+            var rowDiv = $(this).parent();
+            rowDiv.find(".fa.rotate").removeClass("open");
+            rowDiv.parent().removeClass("selected-row");
+        });
+    };
+
     prePostJS.editTitleText = function() {
         $("#toolTitle").hide();
         var titleForm = $("#toolTitleForm");

@@ -35,14 +35,15 @@ $DATABASE_INSTALL = array(
     pre_modified      datetime NULL,
     post_answer       TEXT NULL,
     post_modified     datetime NULL,
-    wrap_up_answer    TEXT NULL,
-    wrap_up_modified  datetime NULL,
+    wrap_answer    TEXT NULL,
+    wrap_modified  datetime NULL,
     
     CONSTRAINT `{$CFG->dbprefix}pp_response_ibfk_1`
         FOREIGN KEY (`main_id`)
         REFERENCES `{$CFG->dbprefix}pp_main` (`main_id`)
         ON DELETE CASCADE,
     
+    UNIQUE(user_id, main_id),
     PRIMARY KEY(response_id)
     
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8")

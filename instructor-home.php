@@ -32,6 +32,14 @@ if (!$toolTitle) {
 
 $hasSetupMain = $PP_DAO->hasSetupMain($_SESSION["main_id"]);
 
+// Clear any preview responses if there are questions
+if ($hasSetupMain) {
+    $instructors = $PP_DAO->findInstructors($CONTEXT->id);
+    foreach($instructors as $instructor) {
+        $PP_DAO->deleteResponseRecord($_SESSION["main_id"], $instructor["user_id"]);
+    }
+}
+
 include("menu.php");
 
 ?>
@@ -202,11 +210,11 @@ if (!$hasSetupMain) {
         <div id="wrapQuestionRow" class="h3 inline hdr-notop-mrgn flx-cntnr flx-row flx-nowrap flx-start question-row">
             <div class="flx-grow-all question-text">
                 <span class="question-text-span" onclick="PrePostJS.editWrapQuestionText()" id="questionTextWrap" tabindex="0">
-                    <?= (!$mainInfo["wrap_question"] || trim(!$mainInfo["wrap_question"]) === '') ? '<em>No wrap-up question.</em>' : $mainInfo["wrap_question"] ?>
+                    <?= (!$mainInfo["wrap_question"] || trim($mainInfo["wrap_question"]) === '') ? '<em>No wrap-up question.</em>' : $mainInfo["wrap_question"] ?>
                 </span>
                 <form id="wrapQuestionTextForm" action="actions/UpdateWrapQuestion.php" method="post" style="display:none;">
                     <label for="wrapQuestionTextInput" class="sr-only">Wrap-Up Question Text</label>
-                    <textarea class="form-control" id="wrapQuestionTextInput" name="questionText" rows="2" required><?= !$mainInfo["wrap_question"] ? '' : $mainInfo["wrap_question"] ?></textarea>
+                    <textarea class="form-control" id="wrapQuestionTextInput" name="questionText" rows="2" required><?= (!$mainInfo["wrap_question"] || trim($mainInfo["wrap_question"]) === '') ? '' : $mainInfo["wrap_question"] ?></textarea>
                 </form>
             </div>
             <a id="wrapQuestionEditAction" href="javascript:void(0);" onclick="PrePostJS.editWrapQuestionText()">

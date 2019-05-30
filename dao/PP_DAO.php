@@ -117,85 +117,106 @@ class PP_DAO {
         $this->PDOX->queryDie($query, $arr);
     }
 
-    function getQuestion($main_id)
-    {
-        $query = "SELECT * FROM {$this->p}pp_question WHERE main_id = :main_id;";
+    function getOrCreateStudentResponseRecord($main_id, $user_id) {
+        $responses = $this->getStudentResponses($main_id, $user_id);
+        if (!$responses) {
+            return $this->createStudentResponseRecord($main_id, $user_id);
+        } else {
+            return $responses;
+        }
+    }
+
+    function getUsersWithAnswers($main_id) {
+        $query = "SELECT DISTINCT user_id FROM {$this->p}pp_response WHERE main_id = :main_id AND pre_answer is not null AND pre_answer != '';";
         $arr = array(':main_id' => $main_id);
-        return $this->PDOX->rowDie($query, $arr);
-    }
-
-    function deleteQuestion($question_id)
-    {
-        $query = "DELETE FROM {$this->p}pp_question WHERE question_id = :question_id;";
-        $arr = array(':question_id' => $question_id);
-        $this->PDOX->queryDie($query, $arr);
-    }
-
-    function editTitle($main_id, $question_title)
-    {
-        $query = "UPDATE {$this->p}pp_question set question_title = :question_title where main_id = :main_id;";
-        $arr = array(':main_id' => $main_id, ':question_title' => $question_title);
-        $this->PDOX->queryDie($query, $arr);
-        return $this->PDOX->lastInsertId();
-    }
-    function editPreQuestion($main_id, $pre_question)
-    {
-        $query = "UPDATE {$this->p}pp_question set pre_question = :pre_question where main_id = :main_id;";
-        $arr = array(':main_id' => $main_id, ':pre_question' => $pre_question);
-        $this->PDOX->queryDie($query, $arr);
-        return $this->PDOX->lastInsertId();
-    }
-    function editPostQuestion($main_id, $post_question)
-    {
-        $query = "UPDATE {$this->p}pp_question set post_question = :post_question where main_id = :main_id;";
-        $arr = array(':main_id' => $main_id, ':post_question' => $post_question);
-        $this->PDOX->queryDie($query, $arr);
-        return $this->PDOX->lastInsertId();
-    }
-    function editWrapUpText($main_id, $wrap_up_text)
-    {
-        $query = "UPDATE {$this->p}pp_question set wrap_up_text = :wrap_up_text where main_id = :main_id;";
-        $arr = array(':main_id' => $main_id, ':wrap_up_text' => $wrap_up_text);
-        $this->PDOX->queryDie($query, $arr);
-        return $this->PDOX->lastInsertId();
-    }
-
-    function getStudentAnswers($question_id, $user_id)
-    {
-        $query = "SELECT * FROM {$this->p}pp_answer WHERE question_id = :question_id AND user_id = :user_id;";
-        $arr = array(':question_id' => $question_id, ':user_id' => $user_id);
-        return $this->PDOX->rowDie($query, $arr);
-    }
-
-    function answerPreQuestion($user_id, $question_ID, $pre_answer)
-    {
-        $query = "INSERT INTO {$this->p}pp_answer (user_id, question_id, pre_answer, pre_modified) VALUES (:user_id, :question_id, :pre_answer, now());";
-        $arr = array(':user_id' => $user_id, ':question_id' => $question_ID, ':pre_answer' => $pre_answer);
-        $this->PDOX->queryDie($query, $arr);
-        return $this->PDOX->lastInsertId();
-    }
-
-    function answerPostQuestion($user_id, $question_ID, $post_answer)
-    {
-        $query = "UPDATE {$this->p}pp_answer set post_answer = :post_answer, post_modified = now() where user_id = :user_id AND question_ID = :question_ID;";
-        $arr = array(':user_id' => $user_id, ':question_ID' => $question_ID, ':post_answer' => $post_answer);
-        $this->PDOX->queryDie($query, $arr);
-        return $this->PDOX->lastInsertId();
-    }
-
-    function answerWrapUpText($user_id, $question_ID, $wrap_up_answer)
-    {
-        $query = "UPDATE {$this->p}pp_answer set wrap_up_answer = :wrap_up_answer, wrap_up_modified = now() where user_id = :user_id AND question_ID = :question_ID;";
-        $arr = array(':user_id' => $user_id, ':question_ID' => $question_ID, ':wrap_up_answer' => $wrap_up_answer);
-        $this->PDOX->queryDie($query, $arr);
-        return $this->PDOX->lastInsertId();
-    }
-
-    function getAllStudentAnswers($question_id)
-    {
-        $query = "SELECT * FROM {$this->p}pp_answer WHERE question_id = :question_id;";
-        $arr = array(':question_id' => $question_id);
         return $this->PDOX->allRowsDie($query, $arr);
+    }
+
+    function getMostRecentAnswerDate($main_id, $user_id) {
+        $query = "SELECT pre_modified, post_modified, wrap_modified FROM {$this->p}pp_response WHERE user_id = :user_id AND main_id = :main_id;";
+        $arr = array(':user_id' => $user_id, ':main_id' => $main_id);
+        $dates = $this->PDOX->rowDie($query, $arr);
+        if ($dates["wrap_modified"] && $dates["wrap_modified"] !== '') {
+            return $dates["wrap_modified"];
+        } else if ($dates["post_modified"] && $dates["post_modified"] !== '') {
+            return $dates["post_modified"];
+        } else {
+            return $dates["pre_modified"];
+        }
+    }
+
+    function getStudentResponses($main_id, $user_id) {
+        $query = "SELECT * FROM {$this->p}pp_response WHERE main_id = :main_id AND user_id = :user_id;";
+        $arr = array(':main_id' => $main_id, ':user_id' => $user_id);
+        return $this->PDOX->rowDie($query, $arr);
+    }
+
+    function getPreResponses($main_id) {
+        $query = "SELECT user_id, pre_answer, pre_modified FROM {$this->p}pp_response WHERE main_id = :main_id AND pre_answer is not null AND pre_answer != '' ORDER BY pre_modified desc";
+        $arr = array(':main_id' => $main_id);
+        return $this->PDOX->allRowsDie($query, $arr);
+    }
+
+    function getPostResponses($main_id) {
+        $query = "SELECT user_id, post_answer, post_modified FROM {$this->p}pp_response WHERE main_id = :main_id AND post_answer is not null AND post_answer != '' ORDER BY post_modified desc";
+        $arr = array(':main_id' => $main_id);
+        return $this->PDOX->allRowsDie($query, $arr);
+    }
+
+    function getWrapResponses($main_id) {
+        $query = "SELECT user_id, wrap_answer, wrap_modified FROM {$this->p}pp_response WHERE main_id = :main_id AND wrap_answer is not null AND wrap_answer != '' ORDER BY wrap_modified desc";
+        $arr = array(':main_id' => $main_id);
+        return $this->PDOX->allRowsDie($query, $arr);
+    }
+
+    function createStudentResponseRecord($main_id, $user_id) {
+        $query = "INSERT INTO {$this->p}pp_response (main_id, user_id) VALUES (:main_id, :user_id);";
+        $arr = array(':main_id' => $main_id, ':user_id' => $user_id);
+        $this->PDOX->queryDie($query, $arr);
+        return $this->getStudentResponses($main_id, $user_id);
+    }
+
+    function deleteResponseRecord($main_id, $user_id) {
+        $query = "DELETE FROM {$this->p}pp_response WHERE main_id = :main_id AND user_id = :user_id";
+        $arr = array(':main_id' => $main_id, ':user_id' => $user_id);
+        $this->PDOX->queryDie($query, $arr);
+    }
+
+    function updatePreResponse($response_id, $pre_answer, $pre_modified) {
+        $query = "UPDATE {$this->p}pp_response SET pre_answer = :pre_answer, pre_modified = :pre_modified WHERE response_id = :response_id";
+        $arr = array(
+            ":pre_answer" => $pre_answer,
+            ":pre_modified" => $pre_modified,
+            ":response_id" => $response_id
+        );
+        $this->PDOX->queryDie($query, $arr);
+    }
+
+    function updatePostResponse($response_id, $post_answer, $post_modified) {
+        $query = "UPDATE {$this->p}pp_response SET post_answer = :post_answer, post_modified = :post_modified WHERE response_id = :response_id";
+        $arr = array(
+            ":post_answer" => $post_answer,
+            ":post_modified" => $post_modified,
+            ":response_id" => $response_id
+        );
+        $this->PDOX->queryDie($query, $arr);
+    }
+
+    function updateWrapResponse($response_id, $wrap_answer, $wrap_modified) {
+        $query = "UPDATE {$this->p}pp_response SET wrap_answer = :wrap_answer, wrap_modified = :wrap_modified WHERE response_id = :response_id";
+        $arr = array(
+            ":wrap_answer" => $wrap_answer,
+            ":wrap_modified" => $wrap_modified,
+            ":response_id" => $response_id
+        );
+        $this->PDOX->queryDie($query, $arr);
+    }
+
+    function findEmail($user_id) {
+        $query = "SELECT email FROM {$this->p}lti_user WHERE user_id = :user_id;";
+        $arr = array(':user_id' => $user_id);
+        $context = $this->PDOX->rowDie($query, $arr);
+        return $context["email"];
     }
 
     function findDisplayName($user_id) {
@@ -205,10 +226,16 @@ class PP_DAO {
         return $context["displayname"];
     }
 
-    function toggleWrapUp($main_id, $show_wrap_up_text){
-        $query = "UPDATE {$this->p}pp_question set show_wrap_up_text = :show_wrap_up_text where main_id = :main_id;";
-        $arr = array(':main_id' => $main_id, ':show_wrap_up_text' => $show_wrap_up_text);
-        $this->PDOX->queryDie($query, $arr);
-        return $this->PDOX->lastInsertId();
+    function findInstructors($context_id) {
+        $query = "SELECT user_id FROM {$this->p}lti_membership WHERE context_id = :context_id AND role = '1000';";
+        $arr = array(':context_id' => $context_id);
+        return $this->PDOX->allRowsDie($query, $arr);
+    }
+
+    function isUserInstructor($context_id, $user_id) {
+        $query = "SELECT role FROM {$this->p}lti_membership WHERE context_id = :context_id AND user_id = :user_id;";
+        $arr = array(':context_id' => $context_id, ':user_id' => $user_id);
+        $role = $this->PDOX->rowDie($query, $arr);
+        return $role["role"] == '1000';
     }
 }
