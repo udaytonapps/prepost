@@ -350,8 +350,30 @@ var PrePostJS = (function () {
         let hrs   = Math.floor(seconds / 3600);
         seconds  -= hrs*3600;
         let mnts = Math.floor(seconds / 60);
-        seconds  -= mnts*60;
-        return days+" days, "+hrs+" hours, "+mnts+" minutes, "+seconds+" seconds";
+
+        let waitTimeString = '';
+        if (days !== 0) {
+            if (days === 1) {
+                waitTimeString = days + ' day';
+            } else {
+                waitTimeString = days + ' days';
+            }
+        }
+        if (hrs !== 0) {
+            if (hrs === 1) {
+                waitTimeString = waitTimeString === '' ? hrs + " hour" : waitTimeString + ", " + hrs + " hour";
+            } else {
+                waitTimeString = waitTimeString === '' ? hrs + " hours" : waitTimeString + ", " + hrs + " hours";
+            }
+        }
+        if (mnts !== 0) {
+            if (mnts === 1) {
+                waitTimeString = waitTimeString === '' ? mnts + " minute" : waitTimeString + ", " + mnts + " minute";
+            } else {
+                waitTimeString = waitTimeString === '' ? mnts + " minutes" : waitTimeString + ", " + mnts + " minutes";
+            }
+        }
+        return waitTimeString;
     };
 
     return prePostJS;

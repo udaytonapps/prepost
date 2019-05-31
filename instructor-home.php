@@ -137,7 +137,7 @@ if (!$hasSetupMain) {
                 <span class="sr-only">Cancel Pre-Question</span>
             </a>
         </div>
-        <h2 class="hdr-right-icon-mrgn flx-cntnr flx-row flx-nowrap flx-center"><span class="fa fa-clock-o hdr-icon-cntr" aria-hidden="true"></span> <small>Wait Time</small></h2>
+        <h2 class="hdr-nobot-mrgn"><small>Wait Time</small></h2>
         <?php
         $waitTimeText = '<em>No wait time set.</em>';
         if ($mainInfo["wait_seconds"] > 0) {
@@ -155,18 +155,22 @@ if (!$hasSetupMain) {
         }
         ?>
         <div id="waitTimeRow" class="h3 inline hdr-notop-mrgn flx-cntnr flx-row flx-nowrap flx-start question-row">
-            <div class="flx-grow-all text-center question-text">
-                <span class="h4 inline question-text-span" onclick="PrePostJS.editWaitTime()" id="waitTimeText" tabindex="0"><?= $waitTimeText ?></span>
+            <div class="flx-grow-all question-text">
+                <span class="question-text-span" onclick="PrePostJS.editWaitTime()" id="waitTimeText" tabindex="0"><?= $waitTimeText ?></span>
                 <form id="waitTimeForm" action="actions/UpdateWaitTime.php" method="post" style="display:none;">
-                    <div class="form-group flx-cntnr flx-row flx-nowrap flx-start">
-                        <label for="waitTime" class="sr-only">Wait Time</label>
-                        <input type="text" class="form-control" id="waitTime" name="waitTime" value="<?= $waitTime ?>">
-                        <label for="waitTimeUnit" class="sr-only">Wait Time Unit</label>
-                        <select class="form-control" id="waitTimeUnit" name="waitTimeUnit">
-                            <option <?= $waitUnit === 'min' ? 'selected' : '' ?> value="min">Minutes</option>
-                            <option <?= $waitUnit === 'hrs' ? 'selected' : '' ?> value="hrs">Hours</option>
-                            <option <?= $waitUnit === 'days' ? 'selected' : '' ?> value="days">Days</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group flx-cntnr flx-row flx-nowrap flx-start">
+                                <label for="waitTime" class="sr-only">Wait Time</label>
+                                <input type="text" class="form-control" id="waitTime" name="waitTime" value="<?= $waitTime ?>">
+                                <label for="waitTimeUnit" class="sr-only">Wait Time Unit</label>
+                                <select class="form-control" id="waitTimeUnit" name="waitTimeUnit">
+                                    <option <?= $waitUnit === 'min' ? 'selected' : '' ?> value="min">Minutes</option>
+                                    <option <?= $waitUnit === 'hrs' ? 'selected' : '' ?> value="hrs">Hours</option>
+                                    <option <?= $waitUnit === 'days' ? 'selected' : '' ?> value="days">Days</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -205,7 +209,6 @@ if (!$hasSetupMain) {
                 <span class="sr-only">Cancel Post-Question</span>
             </a>
         </div>
-        <hr>
         <h2 class="hdr-nobot-mrgn"><small>Wrap-Up Question</small></h2>
         <div id="wrapQuestionRow" class="h3 inline hdr-notop-mrgn flx-cntnr flx-row flx-nowrap flx-start question-row">
             <div class="flx-grow-all question-text">
@@ -248,7 +251,33 @@ include("tool-footer.html");
 $OUTPUT->footerEnd();
 
 function secondsToTime($seconds) {
-    $dtF = new DateTime('@0');
-    $dtT = new DateTime("@$seconds");
-    return $dtF->diff($dtT)->format('%a days, %h hours, %i minutes and %s seconds');
+    $days = floor($seconds / (3600*24));
+    $seconds  -= $days*3600*24;
+    $hours = floor($seconds/3600);
+    $seconds -= $hours*3600;
+    $minutes = floor($seconds/60);
+
+    $waitTimeString = '';
+    if ($days != 0) {
+        if ($days == 1) {
+            $waitTimeString = $days . ' day';
+        } else {
+            $waitTimeString = $days . ' days';
+        }
+    }
+    if ($hours != 0) {
+        if ($hours == 1) {
+            $waitTimeString = $waitTimeString === '' ? $hours . ' hour' : $waitTimeString . ', ' . $hours . ' hour';
+        } else {
+            $waitTimeString = $waitTimeString === '' ? $hours . ' hour' : $waitTimeString . ', ' . $hours . ' hours';
+        }
+    }
+    if ($minutes != 0) {
+        if ($minutes == 1) {
+            $waitTimeString = $waitTimeString === '' ? $minutes .' minute' : $waitTimeString . ', ' . $minutes .' minute';
+        } else {
+            $waitTimeString = $waitTimeString === '' ? $minutes .' minutes' : $waitTimeString . ', ' . $minutes .' minutes';
+        }
+    }
+    return $waitTimeString;
 }

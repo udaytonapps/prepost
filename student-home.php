@@ -58,13 +58,13 @@ if ($PP_DAO->hasSetupMain($_SESSION["main_id"])) {
             $formattedPreDate = $preDateTime->format("m/d/y") . " | " . $preDateTime->format("h:i A");
             ?>
             <h3 class="sub-hdr"><?= $mainInfo["pre_question"] ?></h3>
-            <p><?= $formattedPreDate ?></p>
+            <p>Submitted <?= $formattedPreDate ?></p>
             <?php
             if (isPostReleased($studentResponses["pre_modified"], new DateTime('now', new DateTimeZone($CFG->timezone)), $mainInfo["wait_seconds"])) {
                 // if post is not complete show post form
                 if (!$studentResponses["post_answer"] || trim($studentResponses["post_answer"]) === '') {
                     ?>
-                    <p><em>Your pre-question response will be available to view once you've responded to the post-question.</em></p>
+                    <p class="alert alert-info">Your response will be available once you have responded to the post-question.</p>
                     <h2 class="hdr-nobot-mrgn"><small>Post-Question</small></h2>
                     <form id="answerFormPost" action="actions/AnswerPostQuestion.php" method="post">
                         <div class="form-group">
@@ -82,7 +82,7 @@ if ($PP_DAO->hasSetupMain($_SESSION["main_id"])) {
                     <p><?= $studentResponses["pre_answer"] ?></p>
                     <h2 class="hdr-nobot-mrgn"><small>Post-Question</small></h2>
                     <h3 class="sub-hdr"><?= $mainInfo["post_question"] ?></h3>
-                    <p><?= $formattedPostDate ?></p>
+                    <p>Submitted <?= $formattedPostDate ?></p>
                     <p><?= $studentResponses["post_answer"] ?></p>
                     <?php
                     if ($mainInfo["wrap_question"] && trim($mainInfo["wrap_question"] !== '')) {
@@ -106,7 +106,7 @@ if ($PP_DAO->hasSetupMain($_SESSION["main_id"])) {
                             $formattedWrapDate = $wrapDateTime->format("m/d/y") . " | " . $wrapDateTime->format("h:i A");
                             ?>
                             <h3 class="sub-hdr"><?= $mainInfo["wrap_question"] ?></h3>
-                            <p><?= $formattedWrapDate ?></p>
+                            <p>Submitted <?= $formattedWrapDate ?></p>
                             <p><?= $studentResponses["wrap_answer"] ?></p>
                             <?php
                         }
@@ -114,9 +114,9 @@ if ($PP_DAO->hasSetupMain($_SESSION["main_id"])) {
                 }
             } else {
                 ?>
-                <p><em>Your pre-question response will be available to view once you've responded to the post-question.</em></p>
+                <p class="alert alert-info">Your response will be available once you have responded to the post-question.</p>
                 <h2 class="hdr-nobot-mrgn"><small>Post-Question</small></h2>
-                <p><em>You must wait <?= secondsToTime($mainInfo["wait_seconds"]) ?> before you can respond to the post-question.</em></p>
+                <p class="alert alert-warning alert-padding">The post-question will be available <strong><?= secondsToTime($mainInfo["wait_seconds"]) ?></strong> after you respond to the pre-question.</p>
                 <?php
             }
         }
@@ -147,7 +147,33 @@ function isPostReleased($preModified, $currentTime, $waitSeconds) {
 }
 
 function secondsToTime($seconds) {
-    $dtF = new DateTime('@0');
-    $dtT = new DateTime("@$seconds");
-    return $dtF->diff($dtT)->format('%a days, %h hours, %i minutes and %s seconds');
+    $days = floor($seconds / (3600*24));
+    $seconds  -= $days*3600*24;
+    $hours = floor($seconds/3600);
+    $seconds -= $hours*3600;
+    $minutes = floor($seconds/60);
+
+    $waitTimeString = '';
+    if ($days != 0) {
+        if ($days == 1) {
+            $waitTimeString = $days . ' day';
+        } else {
+            $waitTimeString = $days . ' days';
+        }
+    }
+    if ($hours != 0) {
+        if ($hours == 1) {
+            $waitTimeString = $waitTimeString === '' ? $hours . ' hour' : $waitTimeString . ', ' . $hours . ' hour';
+        } else {
+            $waitTimeString = $waitTimeString === '' ? $hours . ' hour' : $waitTimeString . ', ' . $hours . ' hours';
+        }
+    }
+    if ($minutes != 0) {
+        if ($minutes == 1) {
+            $waitTimeString = $waitTimeString === '' ? $minutes .' minute' : $waitTimeString . ', ' . $minutes .' minute';
+        } else {
+            $waitTimeString = $waitTimeString === '' ? $minutes .' minutes' : $waitTimeString . ', ' . $minutes .' minutes';
+        }
+    }
+    return $waitTimeString;
 }

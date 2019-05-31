@@ -62,11 +62,6 @@ fieldset[disabled] .btn-success.active {
 .btn-success .badge {
     color: #2BC86C;
 }
-hr {
-    border-color: #848484;
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
 h1, .h1 {
     font-weight: 900;
     font-size: 37px;
@@ -381,6 +376,22 @@ label.h5 {
 }
 .alert-banner > .container > .close {
     margin-right: 8px;
+}
+.alert-info {
+    border-color: #1F72EF;
+    background-color: #BEDCFE;
+    color: #0A3D8A;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+.alert-warning {
+    border-color: #A87300;
+    background-color: #FFEDC7;
+    color: #6B4900;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 .splash-container {
     height: 50vh;
