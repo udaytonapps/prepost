@@ -16,9 +16,9 @@
                         <p>Use this page to add a Pre-Question and Post-Question for your students to answer. You may optionally include an amount of time students must wait before responding to the Post-Question and/or a Wrap-Up Question for students to answer at the end.</p>
                         <p>Students will not be able to see their response to the Pre-Question until they've responded to the Post-Question.</p>
                         <h5>Modifying Pre/Post Settings</h5>
-                        <p>Once you've submitted the form to set up the Pre/Post Reflection, you may modify the pre-question, post-question, wait time, or wrap-up question by clicking the edit icon next to the item you'd like to modify.</p>
+                        <p>Once you've set up the Pre/Post Reflection, click on the pencil icon next to any item you'd like to modify. When you are finished editing the item, click on the save icon or press the 'Enter' key to save your changes.</p>
                         <h5>Editing the Title</h5>
-                        <p>You can edit the title of this Pre/Post Reflection by clicking the edit icon next to the title at the top of this page.</p>
+                        <p>You can edit the title of this Pre/Post Reflection by clicking the pencil icon next to the title at the top of this page.</p>
                         <?php
                         break;
                     case 'results-question.php':
@@ -45,9 +45,9 @@
                         } else {
                             ?>
                             <h4>What do I do?</h4>
-                            <p>Answer the Pre-Question below. Once you’ve answered the Pre-Question you will be given a Post-Question. There may be a waiting period before you can see and respond to the Post-Question.</p>
-                            <p>After your Pre-Question and Post-Question responses have been submitted, there may be a final Wrap-Up Question to respond to.</p>
-                            <p><em>Once you submit an answer to a question you can NOT edit your answer.</em></p>
+                            <p>Answer the Pre-Question by typing in box and pressing the Submit button. Once your response has been submitted to the Pre-Question, you may see that you have a waiting period. When the waiting period has expired, return to or refresh the page to answer the Post-Question.</p>
+                            <p>Once you have submitted your answer to the Post-Question, you will be able to see and review your answers to both questions. There may be a final Wrap-Up Question to which you should respond.</p>
+                            <p><em>Once you submit an answer to a question, you cannot edit your answer.</em></p>
                             <?php
                         }
                         break;
