@@ -152,6 +152,9 @@ if (!$hasSetupMain) {
                 $waitUnit = "min";
                 $waitTime = $mainInfo["wait_seconds"] / 60;
             }
+        } else {
+            $waitTime = 0;
+            $waitUnit = "min";
         }
         ?>
         <div id="waitTimeRow" class="h3 inline hdr-notop-mrgn flx-cntnr flx-row flx-nowrap flx-start question-row">

@@ -30,7 +30,7 @@ if ($USER->instructor) {
             $waitTimeSeconds = $_POST["waitTime"] * 24 * 60 * 60;
         }
     } else if (!ctype_digit($_POST["waitTime"])) {
-        $_SESSION['error'] = "Invalid Wait Time. Please try again.";
+        $_SESSION['error'] = "Invalid Wait Time. Please try again or enter a zero to remove the wait time.";
 
         $OUTPUT->buffer=true;
         $result["flashmessage"] = $OUTPUT->flashMessages();
