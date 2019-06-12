@@ -15,15 +15,21 @@ if ($USER->instructor) {
 
     $result = array();
 
-    if (isset($_POST["questionText"]) && trim($_POST["questionText"]) !== '') {
+    if (!isset($_POST["questionText"])) {
+        $_SESSION['error'] = "Wrap-Up Question failed to save. Please try again.";
+    } else {
         $currentTime = new DateTime('now', new DateTimeZone($CFG->timezone));
         $currentTime = $currentTime->format("Y-m-d H:i:s");
 
-        $PP_DAO->updateWrapQuestion($_SESSION["main_id"], $_POST["questionText"], $currentTime);
+        if (trim($_POST["questionText"]) !== '') {
+            $PP_DAO->updateWrapQuestion($_SESSION["main_id"], $_POST["questionText"], $currentTime);
 
-        $_SESSION['success'] = "Wrap-Up Question text saved.";
-    } else {
-        $_SESSION['error'] = "Wrap-Up Question text failed to save. Please try again.";
+            $_SESSION['success'] = "Wrap-Up Question saved.";
+        } else {
+            $PP_DAO->updateWrapQuestion($_SESSION["main_id"], null, $currentTime);
+
+            $_SESSION['success'] = "Wrap-Up Question removed.";
+        }
     }
 
     $OUTPUT->buffer=true;

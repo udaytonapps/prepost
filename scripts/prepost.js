@@ -226,8 +226,8 @@ var PrePostJS = (function () {
                     url: theForm.prop("action"),
                     data: theForm.serialize(),
                     success: function(data) {
-                        if (data.waitseconds) {
-                            waitText.text(_getWaitTimeDisplay(data.waitseconds));
+                        if (data.waitseconds !== undefined) {
+                            waitText.html(_getWaitTimeDisplay(data.waitseconds));
                             waitText.show();
                             $("#waitTimeEditAction").show();
                             $("#waitTimeSaveAction").hide();
@@ -248,8 +248,8 @@ var PrePostJS = (function () {
                     url: theForm.prop("action"),
                     data: theForm.serialize(),
                     success: function(data) {
-                        if (data.waitseconds) {
-                            waitText.text(_getWaitTimeDisplay(data.waitseconds));
+                        if (data.waitseconds !== undefined) {
+                            waitText.html(_getWaitTimeDisplay(data.waitseconds));
                             waitText.show();
                             $("#waitTimeEditAction").show();
                             $("#waitTimeSaveAction").hide();
@@ -287,12 +287,44 @@ var PrePostJS = (function () {
             .off("keypress").on("keypress", function(e) {
             if(e.which === 13) {
                 e.preventDefault();
+                let newWrapText = $('#wrapQuestionTextInput').val();
+                if (newWrapText.trim().length > 0 || confirm("Are you sure you want to remove the wrap-up question from your pre/post reflection?")) {
+                    $.ajax({
+                        type: "POST",
+                        url: theForm.prop("action"),
+                        data: theForm.serialize(),
+                        success: function(data) {
+                            if (newWrapText.trim() === '') {
+                                questionText.html("<em>No wrap-up question.</em>");
+                            } else {
+                                questionText.html(newWrapText);
+                            }
+                            questionText.show();
+                            $("#wrapQuestionEditAction").show();
+                            $("#wrapQuestionSaveAction").hide();
+                            $("#wrapQuestionCancelAction").hide();
+                            theForm.hide();
+                            $("#flashmessages").html(data.flashmessage);
+                            _setupAlertHide();
+                        }
+                    });
+                }
+            }
+        });
+        $("#wrapQuestionSaveAction").show()
+            .off("click").on("click", function(e) {
+            let newWrapText = $('#wrapQuestionTextInput').val();
+            if (newWrapText.trim().length > 0 || confirm("Are you sure you want to remove the wrap-up question from your pre/post reflection?")) {
                 $.ajax({
                     type: "POST",
                     url: theForm.prop("action"),
                     data: theForm.serialize(),
                     success: function(data) {
-                        questionText.text($('#wrapQuestionTextInput').val());
+                        if (newWrapText.trim() === '') {
+                            questionText.html("<em>No wrap-up question.</em>");
+                        } else {
+                            questionText.html(newWrapText);
+                        }
                         questionText.show();
                         $("#wrapQuestionEditAction").show();
                         $("#wrapQuestionSaveAction").hide();
@@ -302,27 +334,7 @@ var PrePostJS = (function () {
                         _setupAlertHide();
                     }
                 });
-
             }
-        });
-        $("#wrapQuestionSaveAction").show()
-            .off("click").on("click", function(e) {
-            $.ajax({
-                type: "POST",
-                url: theForm.prop("action"),
-                data: theForm.serialize(),
-                success: function(data) {
-                    questionText.text($('#wrapQuestionTextInput').val());
-                    questionText.show();
-                    $("#wrapQuestionEditAction").show();
-                    $("#wrapQuestionSaveAction").hide();
-                    $("#wrapQuestionCancelAction").hide();
-                    theForm.hide();
-                    $("#flashmessages").html(data.flashmessage);
-                    _setupAlertHide();
-                }
-            });
-
         });
 
         $("#wrapQuestionCancelAction").show()
@@ -345,6 +357,9 @@ var PrePostJS = (function () {
     };
 
     let _getWaitTimeDisplay = function(seconds) {
+        if (seconds === 0) {
+            return "<em>No wait time set.</em>";
+        }
         let days = Math.floor(seconds / (3600*24));
         seconds  -= days*3600*24;
         let hrs   = Math.floor(seconds / 3600);
