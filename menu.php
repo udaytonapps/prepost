@@ -1,30 +1,20 @@
 <?php
-$menu = array(
-    'instructor-home.php' => '<span aria-hidden="true" class="fa fa-lg fa-wrench"></span> Manage',
-    'student-results.php' => '<span aria-hidden="true" class="fa fa-lg fa-table"></span> All Results',
-    'student-home.php'  => '<span aria-hidden="true" class="fa fa-lg fa-retweet"></span> Preview Question'
-);
-?>
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">Pre-Post</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <?php
-            if($USER->instructor){
-            ?>
-                <?php foreach( $menu as $menupage => $menulabel ) : ?>
-                    <li<?php if($menupage == basename($_SERVER['PHP_SELF'])){echo ' class="active"';} ?>>
-                        <a href="<?php echo $menupage ; ?>">
-                            <?php echo $menulabel ; ?>
-                        </a>
-                    </li>
-                <?php endforeach ?>
-            <?php
-            }
-            ?>
-        </ul>
-    </div>
-</nav>
+if ($USER->instructor) {
+    $menu = new \Tsugi\UI\MenuSet();
+    $menu->setHome('Pre/Post', 'index.php');
+    if ('student-home.php' != basename($_SERVER['PHP_SELF'])) {
+        $menu->addRight('<span class="fas fa-user-graduate" aria-hidden="true"></span> Student View', 'student-home.php');
+        //$menu->addRight('<span class="fas fa-clipboard-check" aria-hidden="true"></span> Grade', 'grade.php');
+        $results = array(
+            new \Tsugi\UI\MenuEntry("By Student", "results-student.php"),
+            new \Tsugi\UI\MenuEntry("By Question", "results-question.php"),
+        );
+        $menu->addRight('<span class="fas fa-poll-h" aria-hidden="true"></span> Results', $results);
+        $menu->addRight('<span class="fas fa-edit" aria-hidden="true"></span> Build', 'instructor-home.php');
+    } else {
+        $menu->addRight('Exit Student View <span class="fas fa-sign-out-alt" aria-hidden="true"></span>', 'instructor-home.php');
+    }
+} else {
+    // No menu for students
+    $menu = false;
+}
