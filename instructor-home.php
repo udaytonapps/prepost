@@ -13,6 +13,8 @@ $p = $CFG->dbprefix;
 
 $PP_DAO = new PP_DAO($PDOX, $p);
 
+include("menu.php");
+
 if (!$USER->instructor) {
     header('Location: ' . addSession('student-home.php'));
 }
@@ -40,35 +42,38 @@ if ($hasSetupMain) {
     }
 }
 
-include("menu.php");
+$OUTPUT->topNav($menu);
+
+echo('<div class="container-fluid">');
+
+$OUTPUT->flashMessages();
 
 ?>
-    <div class="container">
-        <div id="toolTitle" class="h1">
-            <button id="helpButton" type="button" class="btn btn-link pull-right" data-toggle="modal" data-target="#helpModal"><span class="fa fa-question-circle" aria-hidden="true"></span> Help</button>
-            <span class="flx-cntnr flx-row flx-nowrap flx-start">
-                <span class="title-text-span" onclick="PrePostJS.editTitleText();" tabindex="0"><?=$toolTitle?></span>
-                <a id="toolTitleEditLink" class="toolTitleAction" href="javascript:void(0);" onclick="PrePostJS.editTitleText();">
-                    <span class="fa fa-fw fa-pencil" aria-hidden="true"></span>
-                    <span class="sr-only">Edit Title Text</span>
-                </a>
-            </span>
+    <div id="toolTitle" class="h1">
+        <button id="helpButton" type="button" class="btn btn-link pull-right" data-toggle="modal" data-target="#helpModal"><span class="fa fa-question-circle" aria-hidden="true"></span> Help</button>
+        <span class="flx-cntnr flx-row flx-nowrap flx-start">
+            <span class="title-text-span" onclick="PrePostJS.editTitleText();" tabindex="0"><?=$toolTitle?></span>
+            <a id="toolTitleEditLink" class="toolTitleAction" href="javascript:void(0);" onclick="PrePostJS.editTitleText();">
+                <span class="fa fa-fw fa-pencil" aria-hidden="true"></span>
+                <span class="sr-only">Edit Title Text</span>
+            </a>
+        </span>
+    </div>
+    <form id="toolTitleForm" action="actions/UpdateMainTitle.php" method="post" style="display:none;">
+        <label for="toolTitleInput" class="sr-only">Title Text</label>
+        <div class="h1 flx-cntnr flx-row flx-nowrap flx-start">
+            <textarea class="title-edit-input flx-grow-all" id="toolTitleInput" name="toolTitle" rows="2"><?=$toolTitle?></textarea>
+            <a id="toolTitleSaveLink" class="toolTitleAction" href="javascript:void(0);">
+                <span class="fa fa-fw fa-save" aria-hidden="true"></span>
+                <span class="sr-only">Save Title Text</span>
+            </a>
+            <a id="toolTitleCancelLink" class="toolTitleAction" href="javascript:void(0);">
+                <span class="fa fa-fw fa-times" aria-hidden="true"></span>
+                <span class="sr-only">Cancel Title Text</span>
+            </a>
         </div>
-        <form id="toolTitleForm" action="actions/UpdateMainTitle.php" method="post" style="display:none;">
-            <label for="toolTitleInput" class="sr-only">Title Text</label>
-            <div class="h1 flx-cntnr flx-row flx-nowrap flx-start">
-                <textarea class="title-edit-input flx-grow-all" id="toolTitleInput" name="toolTitle" rows="2"><?=$toolTitle?></textarea>
-                <a id="toolTitleSaveLink" class="toolTitleAction" href="javascript:void(0);">
-                    <span class="fa fa-fw fa-save" aria-hidden="true"></span>
-                    <span class="sr-only">Save Title Text</span>
-                </a>
-                <a id="toolTitleCancelLink" class="toolTitleAction" href="javascript:void(0);">
-                    <span class="fa fa-fw fa-times" aria-hidden="true"></span>
-                    <span class="sr-only">Cancel Title Text</span>
-                </a>
-            </div>
-        </form>
-        <p class="lead">Create a question that students can respond to before and after an activity.</p>
+    </form>
+    <p class="lead">Create a question that students can respond to before and after an activity.</p>
 <?php
 
 if (!$hasSetupMain) {
@@ -240,8 +245,6 @@ if (!$hasSetupMain) {
     <?php
 }
 ?>
-    </div>
-
     <input type="hidden" id="sess" value="<?php echo($_GET["PHPSESSID"]) ?>">
 <?php
 
